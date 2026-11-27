@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GRAFIK® — Grudzień 2026</title>
-  <!-- Google Fonts: Inter & Space Grotesk -->
+  <title>GRAFIK® — Grudzień 2026 (Pełny Miesiąc • 7 Osób)</title>
+  <!-- Google Fonts: Space Grotesk, Inter, JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -16,30 +16,31 @@
         extend: {
           colors: {
             editorialBg: '#EAEAEA',
-            editorialInk: '#141414',
-            editorialMuted: '#7A7A7A',
-            editorialRed: '#DE3545',
-            editorialLine: '#D4D4D4',
+            editorialInk: '#111111',
+            editorialMuted: '#6E6E6E',
+            editorialRed: '#EE2E31',
+            editorialLine: '#D1D1D1',
           },
           fontFamily: {
             sans: ['Inter', 'sans-serif'],
             display: ['Space Grotesk', 'Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
           },
         },
       },
     };
   </script>
   <style>
-    /* Bazowe ustawienia typograficzne i estetyczne */
+    /* Bazowe ustawienia editorialowe */
     body {
       background-color: #EAEAEA;
-      color: #141414;
+      color: #111111;
       font-family: 'Inter', sans-serif;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
     }
 
-    /* Pionowe logo w lewym górnym rogu (styl HUYML®) */
+    /* Pionowe logo GRAFIK® w lewym górnym rogu */
     .vertical-brand {
       writing-mode: vertical-rl;
       transform: rotate(180deg);
@@ -47,16 +48,16 @@
 
     /* Gigantyczne białe cyfry w tle sekcji Hero */
     .giant-numeral {
-      font-family: 'Space Grotesk', 'Inter', sans-serif;
+      font-family: 'Space Grotesk', sans-serif;
       font-weight: 700;
       color: #FFFFFF;
       line-height: 0.82;
-      letter-spacing: -0.05em;
+      letter-spacing: -0.055em;
       user-select: none;
       pointer-events: none;
     }
 
-    /* Delikatne animacje lewitacji dla ikon w ilustracji SVG */
+    /* Animacje lewitujących ikon w ilustracji SVG */
     @keyframes floatSlow {
       0%, 100% { transform: translateY(0px) rotate(0deg); }
       50% { transform: translateY(-7px) rotate(2deg); }
@@ -74,558 +75,478 @@
       50% { transform: translateY(-6px); }
     }
 
-    .anim-float-slow { animation: floatSlow 5.2s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
-    .anim-float-med { animation: floatMedium 4.1s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
-    .anim-float-fast { animation: floatFast 3.3s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+    .anim-float-slow { animation: floatSlow 5.4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+    .anim-float-med { animation: floatMedium 4.2s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+    .anim-float-fast { animation: floatFast 3.4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
     .anim-cap { animation: capHover 4.8s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
 
-    /* Subtelny pasek przewijania dla tabeli na mniejszych ekranach */
+    /* Subtelny pasek przewijania dla tabeli 7-osobowej */
     .editorial-scroll::-webkit-scrollbar {
-      height: 6px;
-      width: 6px;
+      height: 7px;
+      width: 7px;
     }
     .editorial-scroll::-webkit-scrollbar-track {
-      background: #E0E0E0;
+      background: #E2E2E2;
     }
     .editorial-scroll::-webkit-scrollbar-thumb {
-      background: #A3A3A3;
+      background: #9E9E9E;
       border-radius: 9999px;
     }
+    .editorial-scroll::-webkit-scrollbar-thumb:hover {
+      background: #111111;
+    }
 
-    /* Podświetlenie aktywnej komórki w trybie edycji */
+    /* Interaktywność edytowalnych komórek */
     .edit-mode-active .shift-cell {
       cursor: pointer;
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      transition: transform 0.14s ease, box-shadow 0.14s ease;
     }
     .edit-mode-active .shift-cell:hover {
-      box-shadow: inset 0 0 0 2px #DE3545;
-      z-index: 5;
+      box-shadow: inset 0 0 0 2px #EE2E31;
       position: relative;
+      z-index: 5;
+    }
+
+    /* Cień przyklejonej kolumny Dzień przy poziomym przewijaniu */
+    .sticky-day-col {
+      position: sticky;
+      left: 0;
+      z-index: 15;
+      box-shadow: 2px 0 6px -2px rgba(17, 17, 17, 0.08);
+    }
+
+    /* Przyklejony nagłówek tabeli podczas przewijania 31 dni */
+    .sticky-thead th {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background-color: #F4F4F4;
+      box-shadow: inset 0 -1px 0 #D1D1D1;
+    }
+    .sticky-thead th.sticky-day-col {
+      z-index: 30;
+    }
+    .sticky-thead th.paulina-head {
+      background-color: #EBF4FD;
+      box-shadow: inset 0 -2px 0 #1E88E5;
     }
   </style>
 </head>
 <body class="bg-editorialBg text-editorialInk selection:bg-editorialRed selection:text-white">
 
   <!-- =================================================================== -->
-  <!-- SEKCJA HERO: PEŁNOEKRANOWY UKŁAD EDITORIALOWY (WZÓR HUYML®)          -->
+  <!-- KOMPAKTOWY HERO: SWISS EDITORIAL (STYL HUYML® — OK. 260–300PX)       -->
   <!-- =================================================================== -->
-  <header id="start" class="relative min-h-screen w-full flex flex-col justify-between px-4 sm:px-6 lg:px-8 pt-5 pb-6 overflow-hidden border-b border-editorialLine">
+  <header id="start" class="relative w-full px-4 sm:px-6 lg:px-8 pt-3 pb-4 overflow-hidden border-b border-editorialLine bg-editorialBg">
 
-    <!-- GIGANTYCZNE BIAŁE CYFRY W TLE (12 oraz GRUDZIEŃ 26) -->
-    <div aria-hidden="true" class="pointer-events-none select-none absolute inset-0 flex items-center justify-between px-1 sm:px-4 md:px-8 z-0 overflow-hidden">
-      <!-- Lewa cyfra: 12 -->
-      <div class="giant-numeral text-[34vw] sm:text-[27vw] lg:text-[22vw] -ml-2 sm:-ml-4 opacity-95">
+    <!-- GIGANTYCZNE BIAŁE CYFRY W TLE (12 · GRUDZIEŃ · 26) -->
+    <div aria-hidden="true" class="pointer-events-none select-none absolute inset-0 flex items-center justify-between px-2 sm:px-6 z-0 overflow-hidden">
+      <div class="giant-numeral text-[26vw] sm:text-[180px] lg:text-[210px] -ml-1 opacity-85">
         12
       </div>
-      <!-- Prawa cyfra: 26 z czerwoną etykietą GRUDZIEŃ -->
       <div class="relative flex items-center">
-        <span class="font-display font-semibold text-editorialRed text-xs sm:text-base md:text-xl tracking-widest uppercase mr-1 sm:mr-2 -mt-4 sm:-mt-8 z-10 bg-editorialBg/70 px-1 rounded">
+        <span class="font-display font-bold text-editorialRed text-[11px] sm:text-sm tracking-[0.22em] uppercase mr-1.5 sm:mr-2.5 z-10 bg-editorialBg/80 px-1.5 py-0.5 rounded">
           GRUDZIEŃ
         </span>
-        <div class="giant-numeral text-[34vw] sm:text-[27vw] lg:text-[22vw] -mr-2 sm:-mr-4 opacity-95">
+        <div class="giant-numeral text-[26vw] sm:text-[180px] lg:text-[210px] -mr-1 opacity-85">
           26
         </div>
       </div>
     </div>
 
-    <!-- GÓRNA SIATKA EDITORIALOWA -->
-    <div class="relative z-20 grid grid-cols-12 gap-y-5 gap-x-3 items-start">
-
-      <!-- Kolumna 1: Pionowe logo GRAFIK® -->
-      <div class="col-span-3 sm:col-span-2 lg:col-span-1 flex items-start gap-1.5">
-        <div class="vertical-brand font-display font-extrabold text-xl sm:text-2xl tracking-tight leading-none text-editorialInk">
-          GRAFIK<span class="text-[10px] align-top font-bold">®</span>
+    <div class="relative z-20 max-w-[1520px] mx-auto">
+      <!-- GÓRNY CIENKI PASEK NAWIGACJI -->
+      <div class="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 pb-2.5 border-b border-editorialLine/80">
+        <!-- Lewa: Znak GRAFIK® + status -->
+        <div class="flex items-center gap-3">
+          <a href="#start" class="inline-flex items-baseline gap-1 font-display font-bold text-lg sm:text-xl tracking-tight leading-none text-editorialInk hover:text-editorialRed transition-colors">
+            <span>GRAFIK<span class="text-[10px] align-top">®</span></span>
+          </a>
+          <span class="hidden sm:inline-block h-3.5 w-px bg-editorialLine"></span>
+          <span class="font-mono text-[10px] sm:text-[11px] text-editorialMuted uppercase tracking-wider">
+            Grudzień 2026 · 7 osób · 31 dni
+          </span>
+          <span id="liveClock" class="hidden md:inline-block font-mono text-[10px] text-editorialMuted tabular-nums border-l border-editorialLine pl-2.5">
+            PL --:--
+          </span>
         </div>
-        <div class="vertical-brand text-[9px] text-editorialMuted tracking-wider uppercase leading-tight pt-0.5">
-          Grudzień 2026 &nbsp;•&nbsp; PL
-        </div>
-      </div>
 
-      <!-- Kolumna 2: Menu nawigacyjne -->
-      <nav aria-label="Nawigacja główna" class="col-span-5 sm:col-span-3 lg:col-span-2">
-        <p class="text-[10px] uppercase tracking-wider text-editorialMuted mb-2">Menu</p>
-        <ul class="space-y-0.5 font-display font-bold text-xs sm:text-[13px] tracking-tight uppercase leading-tight">
-          <li>
-            <a href="#start" data-nav="start" class="nav-link inline-flex items-center gap-1 text-editorialInk hover:text-editorialRed transition-colors py-0.5">
-              <span class="nav-arrow text-editorialRed">→</span> START
-            </a>
-          </li>
-          <li>
-            <a href="#grafik" data-nav="grafik" class="nav-link inline-flex items-center gap-1 text-editorialInk hover:text-editorialRed transition-colors py-0.5">
-              <span class="nav-arrow opacity-0 text-editorialRed">→</span> GRAFIK
-            </a>
-          </li>
-          <li>
-            <a href="#zespol" data-nav="zespol" class="nav-link inline-flex items-center gap-1 text-editorialInk hover:text-editorialRed transition-colors py-0.5">
-              <span class="nav-arrow opacity-0 text-editorialRed">→</span> ZESPÓŁ
-            </a>
-          </li>
-          <li>
-            <a href="#legenda" data-nav="legenda" class="nav-link inline-flex items-center gap-1 text-editorialInk hover:text-editorialRed transition-colors py-0.5">
-              <span class="nav-arrow opacity-0 text-editorialRed">→</span> LEGENDA
-            </a>
-          </li>
-        </ul>
-      </nav>
-
-      <!-- Kolumna 3: Przełącznik Trybu Edycji + Zegar na żywo -->
-      <div class="col-span-4 sm:col-span-4 lg:col-span-3 flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-6 text-[11px]">
-        <div>
+        <!-- Środek/Prawa: Kompaktowa nawigacja + tryb edycji -->
+        <nav aria-label="Nawigacja główna" class="flex flex-wrap items-center gap-x-4 gap-y-1 font-display font-bold text-[11px] sm:text-xs tracking-tight uppercase">
+          <a href="#grafik" class="nav-link inline-flex items-center gap-1 text-editorialInk hover:text-editorialRed transition-colors">
+            <span class="nav-arrow text-editorialRed">→</span> GRAFIK
+          </a>
+          <a href="#zespol" class="nav-link inline-flex items-center gap-1 text-editorialInk hover:text-editorialRed transition-colors">
+            <span class="nav-arrow opacity-0 text-editorialRed">→</span> ZESPÓŁ
+          </a>
+          <a href="#swieta" class="nav-link inline-flex items-center gap-1 text-editorialInk hover:text-editorialRed transition-colors">
+            <span class="nav-arrow opacity-0 text-editorialRed">→</span> ŚWIĘTA
+          </a>
+          <button id="navExportCsvBtn" type="button" class="inline-flex items-center gap-1 text-editorialInk hover:text-editorialRed transition-colors uppercase">
+            <span class="text-editorialRed">↓</span> EKSPORT
+          </button>
+          <span class="hidden sm:inline-block h-3.5 w-px bg-editorialLine"></span>
           <button
             id="heroEditToggle"
             type="button"
-            class="group inline-flex items-center gap-1.5 text-left font-medium text-editorialMuted hover:text-editorialInk transition-colors py-1"
-            title="Włącz lub wyłącz edycję komórek w tabeli"
+            class="inline-flex items-center gap-1 font-mono text-[10px] sm:text-[11px] text-editorialMuted hover:text-editorialInk transition-colors"
+            title="Przełącz tryb edycji komórek w tabeli"
           >
-            <span>Tryb Edycji:</span>
-            <span id="heroEditState" class="font-bold text-editorialInk group-hover:text-editorialRed transition-colors">Off —</span>
+            <span>EDYCJA:</span>
+            <span id="heroEditState" class="font-bold text-editorialRed">ON •</span>
           </button>
+        </nav>
+      </div>
+
+      <!-- ZWARTY UKŁAD POZIOMY HERO (LOGO PIONOWE + DOODLE SVG ~175PX + CZERWONY MANIFEST) -->
+      <div class="grid grid-cols-12 items-center gap-4 pt-3 pb-1">
+
+        <!-- Lewa: Pionowe logo + kontekst Pauliny -->
+        <div class="col-span-12 md:col-span-4 flex items-center gap-3.5">
+          <div class="hidden sm:flex items-start gap-1 shrink-0">
+            <div class="vertical-brand font-display font-bold text-base tracking-tight leading-none text-editorialInk">
+              PLANER<span class="text-[9px] align-top">®</span>
+            </div>
+            <div class="vertical-brand font-mono text-[8px] text-editorialMuted tracking-wider uppercase leading-tight">
+              12 / 2026
+            </div>
+          </div>
+          <div class="space-y-1.5">
+            <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-white/85 border border-editorialLine font-mono text-[10px] font-bold uppercase text-editorialInk">
+              <span class="w-2 h-2 rounded-full bg-[#1E88E5]"></span>
+              Kolumna #1: Paulina
+            </span>
+            <p class="text-xs text-editorialInk/85 leading-snug max-w-xs">
+              Pełny harmonogram grudniowy: <strong>Paulina</strong>, Kasia P., Justyna, Alina, Alicja oraz Pracownia Krawiecka (Dorota, Hanna).
+            </p>
+          </div>
         </div>
-        <div class="leading-snug py-1">
-          <div class="font-semibold text-editorialInk">Zespół zmianowy</div>
-          <div id="liveClock" class="text-editorialMuted tabular-nums">PL --:--</div>
+
+        <!-- Centrum: Kompaktowa ilustracja wektorowa SVG (~170px wysokości) -->
+        <div class="col-span-12 md:col-span-4 flex justify-center items-center">
+          <svg viewBox="0 0 430 495" class="h-[155px] sm:h-[175px] w-auto drop-shadow-sm" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ilustracja grafiku grudniowego: głowa w okularach z kalendarzem 24, nożyczkami, zegarkiem, kawą, pinezką i gwiazdką">
+            <defs>
+              <pattern id="halftoneDots" x="0" y="0" width="6" height="6" patternUnits="userSpaceOnUse">
+                <circle cx="2" cy="2" r="1.15" fill="#111111" />
+              </pattern>
+              <pattern id="halftoneDense" x="0" y="0" width="4.5" height="4.5" patternUnits="userSpaceOnUse">
+                <circle cx="1.8" cy="1.8" r="1.15" fill="#111111" />
+              </pattern>
+            </defs>
+
+            <!-- 1. CZAPKA Z DASZKIEM -->
+            <g class="anim-cap">
+              <path d="M138 106 C138 40, 262 40, 262 106 Z" fill="#FFFFFF" stroke="#111111" stroke-width="5" stroke-linejoin="round" />
+              <path d="M138 106 C138 40, 262 40, 262 106 Z" fill="url(#halftoneDots)" opacity="0.65" />
+              <path d="M200 50 C178 68, 172 86, 172 106" stroke="#111111" stroke-width="3" stroke-linecap="round" />
+              <path d="M200 50 C222 68, 228 86, 228 106" stroke="#111111" stroke-width="3" stroke-linecap="round" />
+              <ellipse cx="200" cy="48" rx="7" ry="4" fill="#111111" />
+              <path d="M152 106 C192 96, 258 94, 290 108 C298 112, 294 124, 276 128 C236 136, 178 130, 152 106 Z" fill="#FFFFFF" stroke="#111111" stroke-width="5" stroke-linejoin="round" />
+              <path d="M158 109 C194 102, 254 102, 284 112 C280 120, 244 128, 180 120 Z" fill="url(#halftoneDense)" />
+            </g>
+
+            <!-- 2. LINIE RUCHU -->
+            <g stroke="#111111" stroke-width="2.6" stroke-linecap="round">
+              <line x1="88" y1="208" x2="112" y2="288" />
+              <line x1="330" y1="206" x2="302" y2="290" />
+            </g>
+
+            <!-- 3. LEWITUJĄCE ELEMENTY DOODLE -->
+            <!-- Kalendarz 24 -->
+            <g class="anim-float-slow" transform="translate(144, 142) rotate(-13)">
+              <rect x="0" y="6" width="54" height="58" rx="7" fill="#FFFFFF" stroke="#111111" stroke-width="4" />
+              <path d="M0 22 H54" stroke="#111111" stroke-width="3.5" />
+              <line x1="15" y1="0" x2="15" y2="12" stroke="#111111" stroke-width="4" stroke-linecap="round" />
+              <line x1="39" y1="0" x2="39" y2="12" stroke="#111111" stroke-width="4" stroke-linecap="round" />
+              <text x="27" y="49" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="23" fill="#EE2E31">24</text>
+            </g>
+
+            <!-- Gwiazdka -->
+            <g class="anim-float-fast" transform="translate(274, 140) rotate(12)">
+              <path d="M22 2 L27 16 L42 21 L27 26 L22 40 L17 26 L2 21 L17 16 Z" fill="#EE2E31" stroke="#111111" stroke-width="3.2" stroke-linejoin="round" />
+              <circle cx="22" cy="21" r="3.5" fill="#FFFFFF" />
+            </g>
+
+            <!-- Zegarek -->
+            <g class="anim-float-med" transform="translate(216, 168) rotate(7)">
+              <rect x="11" y="0" width="18" height="16" rx="3" fill="#FFFFFF" stroke="#111111" stroke-width="3.5" />
+              <rect x="11" y="46" width="18" height="16" rx="3" fill="#FFFFFF" stroke="#111111" stroke-width="3.5" />
+              <circle cx="20" cy="31" r="17" fill="#FFFFFF" stroke="#111111" stroke-width="4" />
+              <circle cx="20" cy="31" r="2.2" fill="#111111" />
+              <line x1="20" y1="31" x2="20" y2="20" stroke="#111111" stroke-width="3" stroke-linecap="round" />
+              <line x1="20" y1="31" x2="28" y2="34" stroke="#111111" stroke-width="3" stroke-linecap="round" />
+            </g>
+
+            <!-- Kawa -->
+            <g class="anim-float-med" transform="translate(128, 234) rotate(-10)">
+              <path d="M6 16 H38 V38 C38 46, 32 50, 22 50 C12 50, 6 46, 6 38 Z" fill="#FFFFFF" stroke="#111111" stroke-width="4" stroke-linejoin="round" />
+              <path d="M38 22 H44 C49 22, 49 36, 44 36 H38" stroke="#111111" stroke-width="3.8" stroke-linecap="round" />
+              <line x1="12" y1="28" x2="32" y2="28" stroke="#111111" stroke-width="2.5" stroke-dasharray="4 3" />
+            </g>
+
+            <!-- Nożyczki krawieckie -->
+            <g class="anim-float-slow" transform="translate(192, 258) rotate(-22)">
+              <path d="M24 24 L62 6 L56 17 L28 30 Z" fill="#FFFFFF" stroke="#111111" stroke-width="3.4" stroke-linejoin="round" />
+              <path d="M24 28 L64 42 L54 46 L26 34 Z" fill="#FFFFFF" stroke="#111111" stroke-width="3.4" stroke-linejoin="round" />
+              <circle cx="30" cy="28" r="3" fill="#EE2E31" />
+              <circle cx="13" cy="18" r="9.5" fill="#FFFFFF" stroke="#111111" stroke-width="3.8" />
+              <circle cx="13" cy="40" r="9.5" fill="#FFFFFF" stroke="#111111" stroke-width="3.8" />
+            </g>
+
+            <!-- Pinezka KATO / WAW -->
+            <g class="anim-float-fast" transform="translate(274, 220) rotate(13)">
+              <path d="M22 4 C11 4, 3 12, 3 23 C3 37, 22 52, 22 52 C22 52, 41 37, 41 23 C41 12, 33 4, 22 4 Z" fill="#FFFFFF" stroke="#111111" stroke-width="4" stroke-linejoin="round" />
+              <circle cx="22" cy="22" r="7" fill="#111111" />
+              <text x="22" y="64" text-anchor="middle" font-family="JetBrains Mono, monospace" font-weight="700" font-size="9" fill="#111111">KATO/WAW</text>
+            </g>
+
+            <!-- 4. OTWARTA GŁOWA W OKULARACH -->
+            <g transform="translate(120, 336)">
+              <ellipse cx="95" cy="20" rx="68" ry="16" fill="#FFFFFF" stroke="#111111" stroke-width="5" />
+              <ellipse cx="95" cy="20" rx="61" ry="11" fill="url(#halftoneDense)" />
+              <path d="M27 20 V68 C27 114, 58 148, 95 148 C132 148, 163 114, 163 68 V20" fill="#FFFFFF" stroke="#111111" stroke-width="5" stroke-linejoin="round" />
+              <path d="M27 64 C11 64, 11 94, 28 96" fill="#FFFFFF" stroke="#111111" stroke-width="5" stroke-linecap="round" />
+              <path d="M163 64 C179 64, 179 94, 162 96" fill="#FFFFFF" stroke="#111111" stroke-width="5" stroke-linecap="round" />
+              <path d="M46 50 Q64 42 82 50" stroke="#111111" stroke-width="6.5" stroke-linecap="round" />
+              <path d="M108 50 Q126 42 144 50" stroke="#111111" stroke-width="6.5" stroke-linecap="round" />
+              <rect x="40" y="58" width="46" height="36" rx="9" fill="#FFFFFF" stroke="#111111" stroke-width="4.5" />
+              <rect x="104" y="58" width="46" height="36" rx="9" fill="#FFFFFF" stroke="#111111" stroke-width="4.5" />
+              <line x1="86" y1="73" x2="104" y2="73" stroke="#111111" stroke-width="4.5" />
+              <path d="M63 63 L66 73 L76 76 L66 79 L63 89 L60 79 L50 76 L60 73 Z" fill="#111111" />
+              <path d="M127 63 L130 73 L140 76 L130 79 L127 89 L124 79 L114 76 L124 73 Z" fill="#111111" />
+              <path d="M95 78 Q103 94 92 98" stroke="#111111" stroke-width="4" stroke-linecap="round" />
+              <path d="M64 111 Q95 117 126 111 C122 132, 68 132, 64 111 Z" fill="#FFFFFF" stroke="#111111" stroke-width="4.5" stroke-linejoin="round" />
+            </g>
+          </svg>
         </div>
-      </div>
 
-      <!-- Kolumna 4: Czerwony manifest (Prawa góra) -->
-      <div class="col-span-12 sm:col-span-9 lg:col-span-4 order-last lg:order-none pt-1 lg:pt-0">
-        <div class="font-display font-bold text-editorialRed uppercase text-sm sm:text-base md:text-[18px] leading-[1.18] tracking-tight">
-          <div>GRUDZIEŃ 2026</div>
-          <div>5 OSÓB W ZESPOLE</div>
-          <div>ZMIANY 11–20 &amp; KATO 11–19</div>
-          <div>14.12 — DZIEŃ SZKOLENIOWY</div>
-          <div>DELEGACJA WARSZAWA</div>
-          <div>URLOPY WYPOCZYNKOWE</div>
-          <div>DO ŚWIĄT CORAZ BLIŻEJ...</div>
+        <!-- Prawa: Zwarty czerwony manifest (4–5 linijek) + szybki eksport -->
+        <div class="col-span-12 md:col-span-4 flex flex-col md:items-end md:text-right justify-center">
+          <div class="font-display font-bold text-editorialRed uppercase text-xs sm:text-sm lg:text-[15px] leading-[1.18] tracking-tight">
+            <div>PEŁNY PLAN GRUDZIEŃ 2026</div>
+            <div>7 OSÓB · SALON + PRACOWNIA</div>
+            <div>KATOWICE · WARSZAWA · SZKOLENIE 14.12</div>
+            <div>PRZERWA ŚWIĄTECZNA 24–26.12</div>
+          </div>
+          <div class="mt-2.5 flex flex-wrap md:justify-end gap-2">
+            <a href="#grafik" class="inline-flex items-center gap-1.5 bg-editorialInk text-white text-[11px] font-semibold uppercase tracking-wider px-3 py-1.5 rounded-md hover:bg-editorialRed transition-colors">
+              Tabela zmian ↓
+            </a>
+            <button id="heroExportBtn" type="button" class="inline-flex items-center gap-1.5 border border-editorialInk/35 bg-white/70 text-editorialInk text-[11px] font-semibold uppercase tracking-wider px-3 py-1.5 rounded-md hover:border-editorialInk transition-colors">
+              CSV (1–31.12)
+            </button>
+          </div>
         </div>
-      </div>
 
-      <!-- Kolumna 5: Eksport CSV (Skrajna prawa góra) -->
-      <div class="col-span-12 sm:col-span-3 lg:col-span-2 flex sm:flex-col items-center sm:items-end justify-between sm:justify-start text-[11px] gap-1">
-        <span class="text-editorialMuted">Eksport</span>
-        <button
-          id="heroExportCsvBtn"
-          type="button"
-          class="font-semibold text-editorialInk underline underline-offset-4 decoration-editorialInk/50 hover:text-editorialRed hover:decoration-editorialRed transition-colors py-1"
-        >
-          Pobierz CSV
-        </button>
-      </div>
-    </div>
-
-    <!-- ŚRODKOWA SEKCJA HERO: ILUSTRACJA DOODLE SVG + PRAWY DOLNY MANIFEST -->
-    <div class="relative z-10 grid grid-cols-12 items-center my-4 lg:my-0">
-      <!-- Pusta lewa przestrzeń (eksponuje cyfrę 12) -->
-      <div class="hidden lg:block lg:col-span-3"></div>
-
-      <!-- Centralna ilustracja wektorowa SVG w stylu gruby kontur + halftone -->
-      <div class="col-span-12 lg:col-span-5 flex justify-center items-center py-2">
-        <svg viewBox="0 0 420 510" class="w-full max-w-[300px] sm:max-w-[340px] lg:max-w-[370px] h-auto drop-shadow-sm" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ilustracja zespołu zmianowego z ikonami kalendarza, zegarka, kawy, walizki i kota">
-          <defs>
-            <!-- Wzór halftone (kropki rastrowe) jak na czapce w referencji -->
-            <pattern id="halftoneDots" x="0" y="0" width="6" height="6" patternUnits="userSpaceOnUse">
-              <circle cx="2" cy="2" r="1.15" fill="#141414" />
-            </pattern>
-            <pattern id="halftoneDense" x="0" y="0" width="4.5" height="4.5" patternUnits="userSpaceOnUse">
-              <circle cx="1.8" cy="1.8" r="1.15" fill="#141414" />
-            </pattern>
-          </defs>
-
-          <!-- ===== 1. CZAPKA Z DASZKIEM (LEWITUJĄCA U GÓRY) ===== -->
-          <g class="anim-cap">
-            <!-- Kopuła czapki -->
-            <path d="M134 110 C134 45, 258 45, 258 110 Z" fill="#FFFFFF" stroke="#141414" stroke-width="5" stroke-linejoin="round" />
-            <path d="M134 110 C134 45, 258 45, 258 110 Z" fill="url(#halftoneDots)" opacity="0.65" />
-            <!-- Przeszycia paneli czapki -->
-            <path d="M196 54 C174 72, 168 90, 168 110" stroke="#141414" stroke-width="3" stroke-linecap="round" />
-            <path d="M196 54 C218 72, 224 90, 224 110" stroke="#141414" stroke-width="3" stroke-linecap="round" />
-            <!-- Guziczek na czubku -->
-            <ellipse cx="196" cy="52" rx="7" ry="4" fill="#141414" />
-            <!-- Daszek czapki -->
-            <path d="M148 110 C188 100, 254 98, 286 112 C294 116, 290 128, 272 132 C232 140, 174 134, 148 110 Z" fill="#FFFFFF" stroke="#141414" stroke-width="5" stroke-linejoin="round" />
-            <path d="M154 113 C190 106, 250 106, 280 116 C276 124, 240 132, 176 124 Z" fill="url(#halftoneDense)" />
-          </g>
-
-          <!-- ===== 2. LINIE RUCHU I DROBNE ROZBRYZGI ===== -->
-          <g stroke="#141414" stroke-width="2.6" stroke-linecap="round">
-            <line x1="88" y1="215" x2="112" y2="292" />
-            <line x1="100" y1="238" x2="114" y2="280" stroke-width="2" />
-            <line x1="322" y1="210" x2="294" y2="294" />
-            <line x1="308" y1="234" x2="292" y2="278" stroke-width="2" />
-            <!-- Spiralki / konfetti -->
-            <path d="M116 168 Q122 162 128 168 T136 172" stroke-width="2" />
-            <path d="M292 162 Q298 156 302 164 T310 168" stroke-width="2" />
-            <path d="M92 315 Q98 308 104 316" stroke-width="2" />
-            <path d="M312 316 Q318 308 324 316" stroke-width="2" />
-            <!-- Iskierki -->
-            <path d="M132 232 L135 224 L138 232 L146 235 L138 238 L135 246 L132 238 L124 235 Z" fill="#141414" stroke="none" />
-            <path d="M282 192 L284 186 L286 192 L292 194 L286 196 L284 202 L282 196 L276 194 Z" fill="#DE3545" stroke="none" />
-          </g>
-
-          <!-- ===== 3. LEWITUJĄCE IKONY DOODLE W ŚRODKU ===== -->
-
-          <!-- Ikona A: Kartka z kalendarza "14" (Szkolenie) -->
-          <g class="anim-float-slow" transform="translate(148, 146) rotate(-14)">
-            <rect x="0" y="6" width="52" height="56" rx="7" fill="#FFFFFF" stroke="#141414" stroke-width="4" />
-            <path d="M0 21 H52" stroke="#141414" stroke-width="3.5" />
-            <line x1="14" y1="0" x2="14" y2="12" stroke="#141414" stroke-width="4" stroke-linecap="round" />
-            <line x1="38" y1="0" x2="38" y2="12" stroke="#141414" stroke-width="4" stroke-linecap="round" />
-            <text x="26" y="48" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="800" font-size="22" fill="#DE3545">14</text>
-          </g>
-
-          <!-- Ikona B: Zegarek na rękę (Zmiany 11-20) -->
-          <g class="anim-float-med" transform="translate(216, 178) rotate(8)">
-            <rect x="11" y="0" width="18" height="16" rx="3" fill="#FFFFFF" stroke="#141414" stroke-width="3.5" />
-            <rect x="11" y="46" width="18" height="16" rx="3" fill="#FFFFFF" stroke="#141414" stroke-width="3.5" />
-            <circle cx="20" cy="31" r="17" fill="#FFFFFF" stroke="#141414" stroke-width="4" />
-            <circle cx="20" cy="31" r="2.2" fill="#141414" />
-            <line x1="20" y1="31" x2="20" y2="21" stroke="#141414" stroke-width="3" stroke-linecap="round" />
-            <line x1="20" y1="31" x2="28" y2="34" stroke="#141414" stroke-width="3" stroke-linecap="round" />
-            <rect x="37" y="28" width="4" height="6" rx="1" fill="#141414" />
-          </g>
-
-          <!-- Ikona C: Kotek doodle (Ukłon w stronę referencji) -->
-          <g class="anim-float-fast" transform="translate(262, 152) rotate(10)">
-            <path d="M6 22 L10 4 L22 14 C27 12, 35 12, 40 14 L52 4 L56 22 C60 34, 52 46, 31 46 C10 46, 2 34, 6 22 Z" fill="#FFFFFF" stroke="#141414" stroke-width="3.8" stroke-linejoin="round" />
-            <circle cx="22" cy="27" r="2.6" fill="#141414" />
-            <circle cx="40" cy="27" r="2.6" fill="#141414" />
-            <path d="M28 32 L31 35 L34 32" stroke="#141414" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
-            <!-- Wąsy -->
-            <line x1="0" y1="28" x2="10" y2="30" stroke="#141414" stroke-width="2.2" stroke-linecap="round" />
-            <line x1="0" y1="35" x2="10" y2="34" stroke="#141414" stroke-width="2.2" stroke-linecap="round" />
-            <line x1="52" y1="30" x2="62" y2="28" stroke="#141414" stroke-width="2.2" stroke-linecap="round" />
-            <line x1="52" y1="34" x2="62" y2="35" stroke="#141414" stroke-width="2.2" stroke-linecap="round" />
-          </g>
-
-          <!-- Ikona D: Kubek gorącej kawy -->
-          <g class="anim-float-med" transform="translate(132, 240) rotate(-10)">
-            <!-- Para -->
-            <path d="M14 0 Q10 6 15 11" stroke="#141414" stroke-width="2.5" stroke-linecap="round" />
-            <path d="M26 -2 Q22 5 27 10" stroke="#141414" stroke-width="2.5" stroke-linecap="round" />
-            <!-- Kubek -->
-            <path d="M6 16 H38 V38 C38 46, 32 50, 22 50 C12 50, 6 46, 6 38 Z" fill="#FFFFFF" stroke="#141414" stroke-width="4" stroke-linejoin="round" />
-            <!-- Ucho -->
-            <path d="M38 22 H44 C49 22, 49 36, 44 36 H38" stroke="#141414" stroke-width="3.8" stroke-linecap="round" />
-            <line x1="12" y1="27" x2="32" y2="27" stroke="#141414" stroke-width="2.5" stroke-dasharray="4 3" />
-          </g>
-
-          <!-- Ikona E: Walizka urlopowa (Urlop W.) -->
-          <g class="anim-float-slow" transform="translate(198, 260) rotate(5)">
-            <path d="M18 10 V4 C18 2, 20 0, 23 0 H35 C38 0, 40 2, 40 4 V10" stroke="#141414" stroke-width="3.5" />
-            <rect x="4" y="10" width="50" height="36" rx="6" fill="#FFFFFF" stroke="#141414" stroke-width="4" />
-            <line x1="17" y1="10" x2="17" y2="46" stroke="#141414" stroke-width="3" />
-            <line x1="41" y1="10" x2="41" y2="46" stroke="#141414" stroke-width="3" />
-            <!-- Naklejka URLOP -->
-            <rect x="21" y="21" width="16" height="12" rx="2" fill="#DE3545" />
-          </g>
-
-          <!-- Ikona F: Pinezka mapy / delegacja (Warszawa / Katowice) -->
-          <g class="anim-float-fast" transform="translate(264, 238) rotate(14)">
-            <path d="M22 4 C11 4, 3 12, 3 23 C3 37, 22 52, 22 52 C22 52, 41 37, 41 23 C41 12, 33 4, 22 4 Z" fill="#FFFFFF" stroke="#141414" stroke-width="4" stroke-linejoin="round" />
-            <circle cx="22" cy="22" r="7" fill="#141414" />
-          </g>
-
-          <!-- Ikona G: Laptop / Arkusz grafiku wpadający do głowy -->
-          <g class="anim-float-med" transform="translate(168, 314) rotate(-8)">
-            <rect x="6" y="4" width="44" height="28" rx="3" fill="#FFFFFF" stroke="#141414" stroke-width="3.8" />
-            <path d="M0 32 H56 L50 40 H6 Z" fill="#141414" />
-            <line x1="14" y1="14" x2="42" y2="14" stroke="#141414" stroke-width="2.4" />
-            <line x1="14" y1="22" x2="32" y2="22" stroke="#DE3545" stroke-width="2.4" />
-          </g>
-
-          <!-- ===== 4. OTWARTA GŁOWA POSTACI W OKULARACH (DÓŁ ILUSTRACJI) ===== -->
-          <g transform="translate(115, 344)">
-            <!-- Wnętrze otwartej głowy (ciemny owal z kropkami) -->
-            <ellipse cx="95" cy="20" rx="68" ry="16" fill="#FFFFFF" stroke="#141414" stroke-width="5" />
-            <ellipse cx="95" cy="20" rx="61" ry="11" fill="url(#halftoneDense)" />
-
-            <!-- Kształt twarzy i uszu -->
-            <path d="M27 20 V68 C27 114, 58 148, 95 148 C132 148, 163 114, 163 68 V20" fill="#FFFFFF" stroke="#141414" stroke-width="5" stroke-linejoin="round" />
-            <!-- Lewe ucho -->
-            <path d="M27 64 C11 64, 11 94, 28 96" fill="#FFFFFF" stroke="#141414" stroke-width="5" stroke-linecap="round" />
-            <!-- Prawe ucho -->
-            <path d="M163 64 C179 64, 179 94, 162 96" fill="#FFFFFF" stroke="#141414" stroke-width="5" stroke-linecap="round" />
-
-            <!-- Grube czarne brwi -->
-            <path d="M46 50 Q64 42 82 50" stroke="#141414" stroke-width="6.5" stroke-linecap="round" />
-            <path d="M108 50 Q126 42 144 50" stroke="#141414" stroke-width="6.5" stroke-linecap="round" />
-
-            <!-- Okulary -->
-            <rect x="40" y="58" width="46" height="36" rx="9" fill="#FFFFFF" stroke="#141414" stroke-width="4.5" />
-            <rect x="104" y="58" width="46" height="36" rx="9" fill="#FFFFFF" stroke="#141414" stroke-width="4.5" />
-            <line x1="86" y1="73" x2="104" y2="73" stroke="#141414" stroke-width="4.5" />
-            <line x1="27" y1="71" x2="40" y2="71" stroke="#141414" stroke-width="4.5" />
-            <line x1="150" y1="71" x2="163" y2="71" stroke="#141414" stroke-width="4.5" />
-
-            <!-- Gwiazdkowe oczy w okularach (jak w referencji HUYML®) -->
-            <path d="M63 63 L66 73 L76 76 L66 79 L63 89 L60 79 L50 76 L60 73 Z" fill="#141414" />
-            <path d="M127 63 L130 73 L140 76 L130 79 L127 89 L124 79 L114 76 L124 73 Z" fill="#141414" />
-
-            <!-- Nos -->
-            <path d="M95 78 Q103 94 92 98" stroke="#141414" stroke-width="4" stroke-linecap="round" />
-
-            <!-- Szeroki uśmiech -->
-            <path d="M64 111 Q95 117 126 111 C122 132, 68 132, 64 111 Z" fill="#FFFFFF" stroke="#141414" stroke-width="4.5" stroke-linejoin="round" />
-            <path d="M72 121 Q95 125 118 121" stroke="#141414" stroke-width="2.5" stroke-linecap="round" />
-          </g>
-        </svg>
-      </div>
-
-      <!-- Prawy dolny akapit manifestu w kolorze czerwonym -->
-      <div class="col-span-12 lg:col-span-4 self-end pb-2 lg:pl-4">
-        <p class="font-display font-bold text-editorialRed uppercase text-sm sm:text-base md:text-[17px] leading-[1.22] tracking-tight">
-          PLANOWANIE ZMIAN NA GRUDZIEŃ 2026 Z JASNOŚCIĄ, PRECYZJĄ I SPOKOJEM. ZESPÓŁ JUSTYNA, KASIA P., PAULINA, ALINA I ALICJA — KOMPLETNY GRAFIK OD 1 DO 23 GRUDNIA.
-        </p>
-        <div class="mt-4 flex flex-wrap gap-2">
-          <a href="#grafik" class="inline-flex items-center gap-2 bg-editorialInk text-white text-xs font-semibold uppercase tracking-wider px-4 py-2.5 rounded-md hover:bg-editorialRed transition-colors">
-            Przejdź do grafiku <span>↓</span>
-          </a>
-          <a href="#zespol" class="inline-flex items-center gap-2 border border-editorialInk/30 text-editorialInk text-xs font-semibold uppercase tracking-wider px-4 py-2.5 rounded-md hover:border-editorialInk transition-colors">
-            Podsumowanie godzin
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- DOLNY 4-KOLUMNOWY INDEKS EDITORIALOWY (WZÓR DOLNEJ CZĘŚCI ZRZUTU) -->
-    <div class="relative z-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-5 mt-2 border-t border-editorialLine/80 text-[11px] leading-[1.55]">
-      <!-- Kolumna 1: Zespół & Godziny (dynamicznie przeliczane) -->
-      <div>
-        <h2 class="text-editorialMuted font-medium mb-2">Zespół &amp; Godziny</h2>
-        <ul id="heroTeamHoursList" class="space-y-0.5 font-medium text-editorialInk">
-          <!-- Wypełniane dynamicznie przez JS -->
-        </ul>
-      </div>
-
-      <!-- Kolumna 2: Wydarzenia & Delegacje -->
-      <div>
-        <h2 class="text-editorialMuted font-medium mb-2">Wydarzenia &amp; Delegacje</h2>
-        <ul id="heroEventsList" class="space-y-0.5 font-medium text-editorialInk">
-          <li><span class="underline decoration-editorialInk/30 underline-offset-2">01.12 — Justyna: Warszawa (8h)</span></li>
-          <li><span class="underline decoration-editorialInk/30 underline-offset-2">14.12 — Szkolenie zespołowe (4 osoby)</span></li>
-          <li><span class="underline decoration-editorialInk/30 underline-offset-2">Zmiany Katowice 11–19 (Alina)</span></li>
-          <li class="text-editorialMuted pt-0.5">Zakres: 01.12.2026 – 23.12.2026</li>
-        </ul>
-      </div>
-
-      <!-- Kolumna 3: Urlopy Wypoczynkowe (dynamicznie przeliczane) -->
-      <div>
-        <h2 class="text-editorialMuted font-medium mb-2">Urlopy Wypoczynkowe</h2>
-        <ul id="heroVacationsList" class="space-y-0.5 font-medium text-editorialInk">
-          <!-- Wypełniane dynamicznie przez JS -->
-        </ul>
-      </div>
-
-      <!-- Kolumna 4: Statusy Zmian -->
-      <div>
-        <h2 class="text-editorialMuted font-medium mb-2">Statusy Zmian</h2>
-        <ul class="space-y-1 font-medium text-editorialInk">
-          <li class="flex items-center gap-2">
-            <span class="w-2.5 h-2.5 rounded-sm bg-white border border-editorialInk/30 shrink-0"></span>
-            <span><strong>11-20</strong> — Zmiana standardowa</span>
-          </li>
-          <li class="flex items-center gap-2">
-            <span class="w-2.5 h-2.5 rounded-sm bg-amber-100 border border-amber-500 shrink-0"></span>
-            <span><strong>11-19 KATO</strong> — Katowice</span>
-          </li>
-          <li class="flex items-center gap-2">
-            <span class="w-2.5 h-2.5 rounded-sm bg-purple-600 shrink-0"></span>
-            <span><strong>Szkolenie / WAW</strong> — Fioletowy</span>
-          </li>
-          <li class="flex items-center gap-2">
-            <span class="w-2.5 h-2.5 rounded-sm bg-sky-500 shrink-0"></span>
-            <span><strong>Urlop W.</strong> — Niebieski</span>
-          </li>
-          <li class="flex items-center gap-2">
-            <span class="w-2.5 h-2.5 rounded-sm bg-[#7F1D1D] shrink-0"></span>
-            <span class="w-2.5 h-2.5 rounded-sm bg-[#334155] -ml-1 shrink-0"></span>
-            <span><strong>Wolne / Niedziela</strong> — Ciemny czerwony / Granat</span>
-          </li>
-        </ul>
       </div>
     </div>
   </header>
 
   <!-- =================================================================== -->
-  <!-- SEKCJA GŁÓWNA: INTERAKTYWNY GRAFIK GRUDZIEŃ 2026                     -->
+  <!-- ZWARTY PASEK KPI BEZPOŚREDNIO POD HERO                               -->
   <!-- =================================================================== -->
-  <main class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+  <section aria-label="Kluczowe wskaźniki miesiąca" class="border-b border-editorialLine bg-white/80">
+    <div id="kpiStrip" class="max-w-[1520px] mx-auto px-4 sm:px-6 lg:px-8 py-2.5 grid grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+      <!-- Wypełniane dynamicznie przez JS -->
+    </div>
+  </section>
 
-    <!-- GRAFIK -->
-    <section id="grafik" class="scroll-mt-8">
-      <!-- Nagłówek sekcji -->
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 border-b border-editorialInk">
+  <!-- =================================================================== -->
+  <!-- GŁÓWNA ZAWARTOŚĆ STRONY (GRAFIK OD RAZU NA GÓRZE)                    -->
+  <!-- =================================================================== -->
+  <main class="max-w-[1520px] mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-10">
+
+    <!-- =============================================================== -->
+    <!-- SEKCJA 1: INTERAKTYWNY GRAFIK (1–31 GRUDNIA 2026 • 7 OSÓB)       -->
+    <!-- =============================================================== -->
+    <section id="grafik" class="scroll-mt-4">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-3 pb-3.5 border-b border-editorialInk">
         <div>
-          <p class="text-[11px] uppercase tracking-widest text-editorialMuted font-semibold mb-1">Harmonogram zmian</p>
-          <h2 class="font-display font-bold text-3xl sm:text-4xl tracking-tight uppercase">
+          <p class="font-mono text-[10px] uppercase tracking-widest text-editorialMuted font-semibold">Harmonogram miesięczny • 1–31.12.2026 • Paulina na 1. miejscu</p>
+          <h1 class="font-display font-bold text-2xl sm:text-3xl tracking-tight uppercase">
             GRAFIK — <span class="text-editorialRed">GRUDZIEŃ 2026</span>
-          </h2>
+          </h1>
         </div>
 
         <!-- Pasek akcji nad tabelą -->
-        <div class="flex flex-wrap items-center gap-2.5">
-          <!-- Przełącznik trybu edycji -->
+        <div class="flex flex-wrap items-center gap-2">
           <button
             id="tableEditToggle"
             type="button"
-            class="inline-flex items-center gap-2 px-3.5 py-2 rounded-md border border-editorialInk/30 bg-white text-xs font-semibold uppercase tracking-wider hover:border-editorialInk transition-all"
+            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-editorialRed bg-white text-editorialRed text-[11px] font-semibold uppercase tracking-wider hover:bg-editorialRed hover:text-white transition-all"
           >
-            <span id="tableEditDot" class="w-2 h-2 rounded-full bg-editorialMuted"></span>
-            <span id="tableEditLabel">Tryb Edycji: OFF</span>
+            <span id="tableEditDot" class="w-2 h-2 rounded-full bg-editorialRed animate-pulse"></span>
+            <span id="tableEditLabel">Edycja: ON</span>
           </button>
 
-          <!-- Przycisk resetu zmian (widoczny po edycji) -->
           <button
             id="resetChangesBtn"
             type="button"
-            class="hidden inline-flex items-center gap-1.5 px-3.5 py-2 rounded-md border border-editorialRed/40 text-editorialRed bg-white text-xs font-semibold uppercase tracking-wider hover:bg-editorialRed hover:text-white transition-all"
+            class="hidden inline-flex items-center gap-1 px-3 py-1.5 rounded-md border border-editorialRed/50 text-editorialRed bg-white text-[11px] font-semibold uppercase tracking-wider hover:bg-editorialRed hover:text-white transition-all"
           >
-            ↺ Resetuj zmiany
+            ↺ Resetuj do oryginału
           </button>
 
-          <!-- Eksport CSV -->
           <button
             id="tableExportCsvBtn"
             type="button"
-            class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-md bg-editorialInk text-white text-xs font-semibold uppercase tracking-wider hover:bg-editorialRed transition-colors"
+            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-editorialInk text-white text-[11px] font-semibold uppercase tracking-wider hover:bg-editorialRed transition-colors"
           >
             ↓ Pobierz CSV
           </button>
         </div>
       </div>
 
-      <!-- Baner informacyjny trybu edycji -->
-      <div id="editModeBanner" class="hidden mt-4 px-4 py-3 rounded-lg bg-editorialRed/10 border border-editorialRed/30 text-editorialInk text-xs sm:text-sm flex flex-wrap items-center justify-between gap-2">
-        <div class="flex items-center gap-2">
-          <span class="inline-block w-2 h-2 rounded-full bg-editorialRed animate-pulse"></span>
-          <span><strong>Tryb Edycji aktywny:</strong> Kliknij dowolną komórkę pracownika w grafiku, aby zmienić opis zmiany, liczbę godzin lub status. Wszystkie podsumowania przeliczają się automatycznie.</span>
+      <!-- ZWARTY PASEK FILTRÓW + KOMPAKTOWA LEGENDA -->
+      <div class="mt-3 p-3 rounded-xl bg-white/90 border border-editorialLine space-y-2.5">
+        <div class="flex flex-wrap items-center gap-1.5">
+          <span class="font-mono text-[10px] uppercase tracking-wider text-editorialMuted font-semibold w-16 shrink-0">Osoba:</span>
+          <div id="personFilterGroup" class="flex flex-wrap gap-1.5"></div>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-1.5">
+          <span class="font-mono text-[10px] uppercase tracking-wider text-editorialMuted font-semibold w-16 shrink-0">Status:</span>
+          <div id="statusFilterGroup" class="flex flex-wrap gap-1.5"></div>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <div class="flex flex-wrap items-center gap-1.5">
+            <span class="font-mono text-[10px] uppercase tracking-wider text-editorialMuted font-semibold w-16 shrink-0">Tydzień:</span>
+            <div id="weekFilterGroup" class="flex flex-wrap gap-1.5"></div>
+          </div>
+
+          <!-- Status zapisu lokalnego -->
+          <div class="flex items-center gap-2 text-[10px] font-mono text-editorialMuted">
+            <span id="editModeHint" class="hidden sm:inline">Kliknij komórkę, aby edytować</span>
+            <span id="savedBadge" class="hidden uppercase tracking-wider px-2 py-0.5 rounded bg-editorialRed/10 text-editorialRed font-bold">
+              Zapisano w localStorage
+            </span>
+          </div>
+        </div>
+
+        <!-- Mini legenda inline nad tabelą -->
+        <div class="pt-2 border-t border-editorialLine/70 flex flex-wrap items-center gap-x-3 gap-y-1 text-[10px] text-editorialMuted">
+          <span class="font-mono uppercase font-semibold text-editorialInk">Legenda:</span>
+          <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-sm bg-white border border-editorialLine"></span>Praca</span>
+          <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-sm bg-[#EFE3D0] border border-[#D4C0A1]"></span>Dorota</span>
+          <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-sm bg-[#F4D03F] border border-[#D4B020]"></span>Hanna</span>
+          <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-sm bg-amber-400"></span>KATO</span>
+          <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-sm bg-[#D966FF]"></span>Szkolenie / WAW</span>
+          <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-sm bg-[#1E88E5]"></span>Urlop W.</span>
+          <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-sm bg-[#4A1C1C]"></span>Wolne (bordowy)</span>
+          <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-sm bg-[#2D3A4F]"></span>Wolne (granat)</span>
+          <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-sm bg-[#B7282E]"></span>Wolne (czerw.)</span>
         </div>
       </div>
 
-      <!-- PASEK FILTRÓW (Osoba / Status / Tydzień) -->
-      <div class="mt-6 p-4 rounded-xl bg-white/70 border border-editorialLine space-y-3.5">
-        <!-- Filtr: Osoba -->
-        <div class="flex flex-wrap items-center gap-2">
-          <span class="text-[11px] uppercase tracking-wider text-editorialMuted font-semibold w-16 shrink-0">Osoba:</span>
-          <div id="personFilterGroup" class="flex flex-wrap gap-1.5">
-            <!-- Generowane przez JS -->
-          </div>
-        </div>
-
-        <!-- Filtr: Status -->
-        <div class="flex flex-wrap items-center gap-2">
-          <span class="text-[11px] uppercase tracking-wider text-editorialMuted font-semibold w-16 shrink-0">Status:</span>
-          <div id="statusFilterGroup" class="flex flex-wrap gap-1.5">
-            <!-- Generowane przez JS -->
-          </div>
-        </div>
-
-        <!-- Filtr: Tydzień -->
-        <div class="flex flex-wrap items-center gap-2">
-          <span class="text-[11px] uppercase tracking-wider text-editorialMuted font-semibold w-16 shrink-0">Tydzień:</span>
-          <div id="weekFilterGroup" class="flex flex-wrap gap-1.5">
-            <!-- Generowane przez JS -->
-          </div>
-        </div>
-      </div>
-
-      <!-- KONTENER TABELI GRAFIKU -->
-      <div id="scheduleTableWrapper" class="mt-5 rounded-xl border border-editorialLine bg-white overflow-hidden shadow-sm">
-        <div class="overflow-x-auto editorial-scroll">
-          <table class="w-full border-collapse text-left min-w-[780px]">
-            <thead id="scheduleHead" class="bg-[#F4F4F4] border-b border-editorialLine text-[11px] uppercase tracking-wider text-editorialInk">
-              <!-- Generowane dynamicznie przez JS -->
-            </thead>
-            <tbody id="scheduleBody" class="divide-y divide-editorialLine text-xs">
-              <!-- Generowane dynamicznie przez JS -->
-            </tbody>
+      <!-- TABELA GRAFIKU (7 OSÓB, PAULINA #1, STICKY THEAD + STICKY DZIEŃ) -->
+      <div id="scheduleTableWrapper" class="mt-3 rounded-xl border border-editorialLine bg-white overflow-hidden shadow-sm edit-mode-active">
+        <div class="overflow-auto max-h-[72vh] editorial-scroll">
+          <table class="w-full border-collapse text-left min-w-[1040px]">
+            <thead id="scheduleHead" class="sticky-thead text-[11px] uppercase tracking-wider text-editorialInk"></thead>
+            <tbody id="scheduleBody" class="divide-y divide-editorialLine text-xs"></tbody>
           </table>
         </div>
       </div>
 
-      <!-- Informacja pod tabelą -->
-      <div class="mt-3 flex flex-wrap items-center justify-between text-[11px] text-editorialMuted gap-2">
-        <span id="visibleRowsInfo">Wyświetlanie 23 z 23 dni grudnia 2026</span>
-        <span>Wskazówka: Wybierz osobę w filtrach powyżej, aby wyróżnić jej kolumnę lub skupić się na jej grafiku.</span>
+      <div class="mt-2 flex flex-wrap items-center justify-between text-[11px] text-editorialMuted gap-2">
+        <span id="visibleRowsInfo" class="font-mono">Wyświetlanie 31 z 31 dni grudnia 2026</span>
+        <span>Nagłówek tabeli i kolumna <strong>Dzień</strong> są przyklejone podczas przewijania.</span>
       </div>
     </section>
 
-    <!-- =================================================================== -->
-    <!-- SEKCJA ZESPÓŁ: 5 KART PODSUMOWANIA (SWISS EDITORIAL)                 -->
-    <!-- =================================================================== -->
-    <section id="zespol" class="scroll-mt-8">
-      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-2 pb-5 border-b border-editorialInk">
+    <!-- =============================================================== -->
+    <!-- SEKCJA 2: PODSUMOWANIE ZESPOŁU (7 KART — PAULINA #1)             -->
+    <!-- =============================================================== -->
+    <section id="zespol" class="scroll-mt-6">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-2 pb-4 border-b border-editorialInk">
         <div>
-          <p class="text-[11px] uppercase tracking-widest text-editorialMuted font-semibold mb-1">Statystyki indywidualne</p>
+          <p class="font-mono text-[10px] uppercase tracking-widest text-editorialMuted font-semibold mb-0.5">Statystyki indywidualne • Paulina na 1. miejscu</p>
           <h2 class="font-display font-bold text-2xl sm:text-3xl tracking-tight uppercase">
             PODSUMOWANIE <span class="text-editorialRed">ZESPOŁU</span>
           </h2>
         </div>
-        <p class="text-xs text-editorialMuted">Norma bazowa podglądu: 160h (skala paska postępu)</p>
+        <p class="font-mono text-[11px] text-editorialMuted">Kliknij kartę, aby przefiltrować grafik • Norma: 160 h</p>
       </div>
 
-      <div id="teamSummaryGrid" class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-        <!-- 5 kart generowanych dynamicznie przez JS -->
+      <div id="teamSummaryGrid" class="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-7 gap-3">
+        <!-- 7 kart generowanych dynamicznie przez JS -->
+      </div>
+
+      <!-- 4-KOLUMNOWY INDEKS EDITORIALOWY (PRZENIESIONY POD TABELĘ) -->
+      <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-4 rounded-xl bg-white/75 border border-editorialLine text-[11px] leading-[1.55]">
+        <div>
+          <h3 class="text-editorialMuted font-mono uppercase text-[10px] tracking-wider mb-1.5">01 / Łączne godziny zespołu</h3>
+          <div id="heroIndexHours" class="space-y-1 font-medium text-editorialInk"></div>
+        </div>
+        <div>
+          <h3 class="text-editorialMuted font-mono uppercase text-[10px] tracking-wider mb-1.5">02 / Szkolenia &amp; Wyjazdy</h3>
+          <div id="heroIndexEvents" class="space-y-1 font-medium text-editorialInk"></div>
+        </div>
+        <div>
+          <h3 class="text-editorialMuted font-mono uppercase text-[10px] tracking-wider mb-1.5">03 / Pracownia Krawiecka</h3>
+          <div id="heroIndexTailors" class="space-y-1 font-medium text-editorialInk"></div>
+        </div>
+        <div>
+          <h3 class="text-editorialMuted font-mono uppercase text-[10px] tracking-wider mb-1.5">04 / Przerwa Świąteczna</h3>
+          <div id="heroIndexHolidays" class="space-y-1 font-medium text-editorialInk"></div>
+        </div>
       </div>
     </section>
 
-    <!-- =================================================================== -->
-    <!-- SEKCJA LEGENDA & INFORMACJE                                          -->
-    <!-- =================================================================== -->
-    <section id="legenda" class="scroll-mt-8 pb-8">
-      <div class="pb-5 border-b border-editorialInk">
-        <p class="text-[11px] uppercase tracking-widest text-editorialMuted font-semibold mb-1">Oznaczenia i zasady</p>
+    <!-- =============================================================== -->
+    <!-- SEKCJA 3: ŚWIĘTA I KLUCZOWE DATY                                 -->
+    <!-- =============================================================== -->
+    <section id="swieta" class="scroll-mt-6 pb-4 space-y-5">
+      <div class="pb-4 border-b border-editorialInk">
+        <p class="font-mono text-[10px] uppercase tracking-widest text-editorialMuted font-semibold mb-0.5">Dni ustawowo wolne &amp; ważne terminy</p>
         <h2 class="font-display font-bold text-2xl sm:text-3xl tracking-tight uppercase">
-          LEGENDA <span class="text-editorialRed">ZMIAN</span>
+          ŚWIĘTA <span class="text-editorialRed">&amp; KALENDARZ</span>
         </h2>
       </div>
 
-      <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-xs">
-        <div class="p-4 rounded-xl bg-white border border-editorialLine flex items-start gap-3">
-          <span class="mt-0.5 px-2 py-1 rounded bg-[#F7F7F7] border border-editorialLine font-bold text-[11px] shrink-0">11-20</span>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="p-4 rounded-xl bg-[#7A1622] text-white border border-[#5B0F18] flex flex-col justify-between">
           <div>
-            <h3 class="font-bold text-editorialInk uppercase tracking-tight">Zmiana standardowa</h3>
-            <p class="text-editorialMuted mt-0.5">Standardowa zmiana stacjonarna (8,00h). Czerwone podświetlenie oznacza zmianę oznaczoną w arkuszu jako priorytetowa / specjalna.</p>
+            <span class="font-mono text-[10px] uppercase tracking-widest text-white/75">24–26 Grudnia 2026</span>
+            <h3 class="font-display font-bold text-lg uppercase tracking-tight mt-1">Przerwa Świąteczna</h3>
+            <p class="text-xs text-white/85 mt-1.5 leading-relaxed">
+              Wigilia (24.12), Boże Narodzenie I (25.12) oraz II (26.12) — cały 7-osobowy zespół ma wolne. Z niedzielą 27.12 daje to 4 dni przerwy.
+            </p>
+          </div>
+          <div class="mt-3 pt-2.5 border-t border-white/15 font-mono text-[11px] flex justify-between">
+            <span>Status:</span>
+            <span class="font-bold">ZAMKNIĘTE (4 DNI)</span>
           </div>
         </div>
 
-        <div class="p-4 rounded-xl bg-white border border-editorialLine flex items-start gap-3">
-          <span class="mt-0.5 px-2 py-1 rounded bg-amber-50 border border-amber-400 text-amber-900 font-bold text-[11px] shrink-0">11-19 KATO</span>
+        <div class="p-4 rounded-xl bg-white border border-editorialLine flex flex-col justify-between">
           <div>
-            <h3 class="font-bold text-editorialInk uppercase tracking-tight">Zmiana Katowice</h3>
-            <p class="text-editorialMuted mt-0.5">Dyżur w lokalizacji Katowice (11:00–19:00, 8,00h) — realizowany w grudniu przez Alinę.</p>
+            <span class="font-mono text-[10px] uppercase tracking-widest text-editorialRed font-bold">31 Grudnia 2026 • Czwartek</span>
+            <h3 class="font-display font-bold text-lg uppercase tracking-tight mt-1 text-editorialInk">Sylwester</h3>
+            <p class="text-xs text-editorialMuted mt-1.5 leading-relaxed">
+              Dzień otwarty do edycji dla wszystkich 7 osób. Kliknij dowolną komórkę w wierszu <strong>31. czwartek</strong>, aby ustawić dyżur lub dzień wolny.
+            </p>
+          </div>
+          <div class="mt-3 pt-2.5 border-t border-editorialLine font-mono text-[11px] flex justify-between text-editorialInk">
+            <span>Edytowalność:</span>
+            <span class="font-bold text-editorialRed">OTWARTY DO EDYCJI</span>
           </div>
         </div>
 
-        <div class="p-4 rounded-xl bg-white border border-editorialLine flex items-start gap-3">
-          <span class="mt-0.5 px-2 py-1 rounded bg-purple-600 text-white font-bold text-[11px] shrink-0">SZKOLENIE / WAW</span>
+        <div class="p-4 rounded-xl bg-white border border-editorialLine flex flex-col justify-between">
           <div>
-            <h3 class="font-bold text-editorialInk uppercase tracking-tight">Szkolenia &amp; Delegacje</h3>
-            <p class="text-editorialMuted mt-0.5">Wydarzenia specjalne: delegacja Warszawa (01.12 Justyna) oraz szkolenie zespołowe 14.12 (Justyna, Kasia P., Paulina, Alina).</p>
+            <span class="font-mono text-[10px] uppercase tracking-widest text-purple-700 font-bold">Kluczowe dni w grudniu</span>
+            <h3 class="font-display font-bold text-lg uppercase tracking-tight mt-1 text-editorialInk">Szkolenie &amp; Delegacje</h3>
+            <ul class="text-xs text-editorialMuted mt-1.5 space-y-1">
+              <li>• <strong class="text-editorialInk">14.12 (poniedziałek):</strong> Szkolenie (Paulina, Kasia P., Justyna, Alina).</li>
+              <li>• <strong class="text-editorialInk">Warszawa:</strong> Justyna (1.12, 28.12, 29.12), Alicja (18.12).</li>
+              <li>• <strong class="text-editorialInk">Niedziele wolne:</strong> 6.12, 13.12, 20.12, 27.12.</li>
+            </ul>
           </div>
-        </div>
-
-        <div class="p-4 rounded-xl bg-white border border-editorialLine flex items-start gap-3">
-          <span class="mt-0.5 px-2 py-1 rounded bg-sky-500 text-white font-bold text-[11px] shrink-0">Urlop W.</span>
-          <div>
-            <h3 class="font-bold text-editorialInk uppercase tracking-tight">Urlop wypoczynkowy</h3>
-            <p class="text-editorialMuted mt-0.5">Planowany urlop wypoczynkowy. Godziny urlopowe są zliczane osobno w kartach podsumowania zespołu.</p>
-          </div>
-        </div>
-
-        <div class="p-4 rounded-xl bg-white border border-editorialLine flex items-start gap-3">
-          <span class="mt-0.5 px-2 py-1 rounded bg-[#7F1D1D] text-white font-bold text-[11px] shrink-0">WOLNE</span>
-          <div>
-            <h3 class="font-bold text-editorialInk uppercase tracking-tight">Dzień wolny (Ciemny czerwony / Granat)</h3>
-            <p class="text-editorialMuted mt-0.5">Oznaczenie dni wolnych w grafiku zgodnie z kolorystyką arkusza źródłowego oraz pełnych niedziel niehandlowych.</p>
-          </div>
-        </div>
-
-        <div class="p-4 rounded-xl bg-white border border-editorialLine flex items-start gap-3">
-          <span class="mt-0.5 px-2 py-1 rounded bg-editorialInk text-white font-bold text-[11px] shrink-0">EDYCJA</span>
-          <div>
-            <h3 class="font-bold text-editorialInk uppercase tracking-tight">Edycja na żywo i CSV</h3>
-            <p class="text-editorialMuted mt-0.5">Włącz <strong>Tryb Edycji</strong>, kliknij komórkę i wprowadź zmiany. Następnie pobierz zaktualizowany plik <code>grafik-grudzien-2026.csv</code>.</p>
+          <div class="mt-3 pt-2.5 border-t border-editorialLine font-mono text-[11px] flex justify-between text-editorialInk">
+            <span>Liczba niedziel:</span>
+            <span class="font-bold">4 DNI</span>
           </div>
         </div>
       </div>
@@ -633,69 +554,68 @@
   </main>
 
   <!-- STOPKA -->
-  <footer class="border-t border-editorialLine px-4 sm:px-6 lg:px-8 py-6 text-[11px] text-editorialMuted flex flex-col sm:flex-row items-center justify-between gap-2 max-w-[1440px] mx-auto">
-    <div class="font-display font-bold text-editorialInk uppercase tracking-tight">GRAFIK® — Grudzień 2026</div>
-    <div>Zespół: Justyna • Kasia P. • Paulina • Alina • Alicja</div>
+  <footer class="border-t border-editorialLine px-4 sm:px-6 lg:px-8 py-5 text-[11px] text-editorialMuted flex flex-col sm:flex-row items-center justify-between gap-2 max-w-[1520px] mx-auto">
+    <div class="font-display font-bold text-editorialInk uppercase tracking-tight">GRAFIK® — Grudzień 2026 (1–31.12)</div>
+    <div class="font-mono text-[10px]">Paulina • Kasia P. • Justyna • Alina • Alicja • Krawcowa Dorota • Krawcowa Hanna</div>
   </footer>
 
   <!-- =================================================================== -->
-  <!-- MODAL EDYCJI KOMÓRKI (TRYB EDYCJI)                                   -->
+  <!-- MODAL EDYCJI KOMÓRKI                                                 -->
   <!-- =================================================================== -->
-  <div id="editModalBackdrop" class="fixed inset-0 z-50 hidden bg-editorialInk/50 backdrop-blur-[2px] flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="editModalTitle">
+  <div id="editModalBackdrop" class="fixed inset-0 z-50 hidden bg-editorialInk/55 backdrop-blur-[2px] flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="editModalTitle">
     <div class="w-full max-w-md rounded-xl bg-[#EAEAEA] border-2 border-editorialInk shadow-2xl overflow-hidden">
-      <!-- Nagłówek modala -->
-      <div class="px-5 py-4 bg-white border-b border-editorialLine flex items-center justify-between">
+      <div class="px-5 py-3.5 bg-white border-b border-editorialLine flex items-center justify-between">
         <div>
-          <p id="editModalSubtitle" class="text-[10px] uppercase tracking-widest text-editorialMuted font-semibold">Edycja zmiany</p>
-          <h3 id="editModalTitle" class="font-display font-bold text-lg text-editorialInk uppercase tracking-tight">Pracownik — Dzień</h3>
+          <p id="editModalSubtitle" class="font-mono text-[10px] uppercase tracking-widest text-editorialMuted font-semibold">Edycja zmiany</p>
+          <h3 id="editModalTitle" class="font-display font-bold text-lg text-editorialInk uppercase tracking-tight">Pracownik</h3>
         </div>
         <button id="closeModalBtn" type="button" class="w-8 h-8 rounded-md flex items-center justify-center text-editorialMuted hover:text-editorialInk hover:bg-editorialBg transition-colors text-lg font-bold" aria-label="Zamknij">
           ×
         </button>
       </div>
 
-      <!-- Formularz edycji -->
       <form id="editShiftForm" class="p-5 space-y-4">
         <!-- Szybkie presety -->
         <div>
-          <label class="block text-[10px] uppercase tracking-wider text-editorialMuted font-semibold mb-1.5">Szybki wybór</label>
+          <label class="block font-mono text-[10px] uppercase tracking-wider text-editorialMuted font-semibold mb-1.5">Szybki wybór</label>
           <div class="flex flex-wrap gap-1.5">
             <button type="button" data-preset="work" class="preset-btn px-2.5 py-1.5 rounded bg-white border border-editorialLine text-[11px] font-semibold hover:border-editorialInk">11-20 (8h)</button>
-            <button type="button" data-preset="kato" class="preset-btn px-2.5 py-1.5 rounded bg-amber-50 border border-amber-400 text-amber-900 text-[11px] font-semibold hover:border-amber-700">11-19 KATO (8h)</button>
-            <button type="button" data-preset="event" class="preset-btn px-2.5 py-1.5 rounded bg-purple-600 text-white text-[11px] font-semibold hover:bg-purple-700">11-20 Szkolenie</button>
-            <button type="button" data-preset="vacation" class="preset-btn px-2.5 py-1.5 rounded bg-sky-500 text-white text-[11px] font-semibold hover:bg-sky-600">Urlop W. (8h)</button>
-            <button type="button" data-preset="off-red" class="preset-btn px-2.5 py-1.5 rounded bg-[#7F1D1D] text-white text-[11px] font-semibold hover:opacity-90">Wolne (Czerw.)</button>
-            <button type="button" data-preset="off-navy" class="preset-btn px-2.5 py-1.5 rounded bg-[#334155] text-white text-[11px] font-semibold hover:opacity-90">Wolne (Granat)</button>
+            <button type="button" data-preset="dorota" class="preset-btn px-2.5 py-1.5 rounded bg-[#EFE3D0] border border-[#CBB592] text-editorialInk text-[11px] font-semibold hover:border-editorialInk">10-20 (10h)</button>
+            <button type="button" data-preset="hanna" class="preset-btn px-2.5 py-1.5 rounded bg-[#F4D03F] border border-[#CCA81A] text-editorialInk text-[11px] font-semibold hover:border-editorialInk">10-18 (8h)</button>
+            <button type="button" data-preset="kato" class="preset-btn px-2.5 py-1.5 rounded bg-amber-50 border border-amber-500 text-amber-950 text-[11px] font-semibold hover:border-amber-700">11-19 KATO (8h)</button>
+            <button type="button" data-preset="warszawa" class="preset-btn px-2.5 py-1.5 rounded bg-[#D966FF] text-white text-[11px] font-semibold hover:opacity-90">WARSZAWA (8h)</button>
+            <button type="button" data-preset="szkolenie" class="preset-btn px-2.5 py-1.5 rounded bg-[#D966FF] text-white text-[11px] font-semibold hover:opacity-90">Szkolenie (8h)</button>
+            <button type="button" data-preset="urlop" class="preset-btn px-2.5 py-1.5 rounded bg-[#1E88E5] text-white text-[11px] font-semibold hover:opacity-90">Urlop W. (8h)</button>
+            <button type="button" data-preset="off" class="preset-btn px-2.5 py-1.5 rounded bg-[#4A1C1C] text-white text-[11px] font-semibold hover:opacity-90">Wolne (0h)</button>
           </div>
         </div>
 
-        <!-- Etykieta zmiany -->
+        <!-- Opis zmiany -->
         <div>
-          <label for="shiftLabelInput" class="block text-[10px] uppercase tracking-wider text-editorialMuted font-semibold mb-1">Opis zmiany</label>
+          <label for="shiftLabelInput" class="block font-mono text-[10px] uppercase tracking-wider text-editorialMuted font-semibold mb-1">Tekst zmiany</label>
           <input id="shiftLabelInput" type="text" required class="w-full px-3 py-2 rounded-md bg-white border border-editorialLine text-sm font-semibold text-editorialInk focus:outline-none focus:border-editorialRed" placeholder="np. 11-20, WARSZAWA, Urlop W." />
         </div>
 
-        <!-- Godziny i Status -->
+        <!-- Godziny i Kategoria -->
         <div class="grid grid-cols-2 gap-3">
           <div>
-            <label for="shiftHoursInput" class="block text-[10px] uppercase tracking-wider text-editorialMuted font-semibold mb-1">Godziny (h)</label>
-            <input id="shiftHoursInput" type="number" min="0" max="24" step="0.5" required class="w-full px-3 py-2 rounded-md bg-white border border-editorialLine text-sm font-semibold text-editorialInk focus:outline-none focus:border-editorialRed" />
+            <label for="shiftHoursInput" class="block font-mono text-[10px] uppercase tracking-wider text-editorialMuted font-semibold mb-1">Godziny (h)</label>
+            <input id="shiftHoursInput" type="number" min="0" max="24" step="0.5" required class="w-full px-3 py-2 rounded-md bg-white border border-editorialLine font-mono text-sm font-semibold text-editorialInk focus:outline-none focus:border-editorialRed" />
           </div>
           <div>
-            <label for="shiftTypeSelect" class="block text-[10px] uppercase tracking-wider text-editorialMuted font-semibold mb-1">Status / Kolor</label>
+            <label for="shiftTypeSelect" class="block font-mono text-[10px] uppercase tracking-wider text-editorialMuted font-semibold mb-1">Kategoria</label>
             <select id="shiftTypeSelect" class="w-full px-3 py-2 rounded-md bg-white border border-editorialLine text-sm font-semibold text-editorialInk focus:outline-none focus:border-editorialRed">
-              <option value="work">Zmiana 11-20 (Standard)</option>
-              <option value="work-red">Zmiana 11-20 (Czerwona)</option>
-              <option value="kato">Katowice 11-19</option>
-              <option value="event">Szkolenie / Delegacja</option>
-              <option value="vacation">Urlop Wypoczynkowy</option>
-              <option value="off-red">Wolne (Ciemny czerwony)</option>
-              <option value="off-navy">Wolne (Granat)</option>
+              <option value="work">Praca (work)</option>
+              <option value="kato">Katowice (kato)</option>
+              <option value="warszawa">Warszawa (warszawa)</option>
+              <option value="szkolenie">Szkolenie (szkolenie)</option>
+              <option value="urlop">Urlop W. (urlop)</option>
+              <option value="off">Wolne (off)</option>
             </select>
           </div>
         </div>
 
-        <!-- Przyciski akcji -->
+        <!-- Przyciski -->
         <div class="pt-2 flex items-center justify-end gap-2 border-t border-editorialLine">
           <button id="cancelModalBtn" type="button" class="px-4 py-2 rounded-md border border-editorialInk/30 text-xs font-semibold uppercase tracking-wider text-editorialInk hover:bg-white transition-colors">
             Anuluj
@@ -708,328 +628,480 @@
     </div>
   </div>
 
-  <!-- POWIADOMIENIE TOAST (zamiast alert()) -->
+  <!-- POWIADOMIENIE TOAST -->
   <div id="toastContainer" class="fixed bottom-5 right-5 z-50 pointer-events-none flex flex-col gap-2"></div>
 
   <!-- =================================================================== -->
-  <!-- LOGIKA APLIKACJI (DANE, FILTRY, EDYCJA, STATYSTYKI, EKSPORT CSV)     -->
+  <!-- LOGIKA APLIKACJI (PAULINA #1, 7 OSÓB, 31 DNI, LOCALSTORAGE, CSV)     -->
   <!-- =================================================================== -->
   <script>
     (function () {
       'use strict';
 
+      // Nowy klucz localStorage dla zaktualizowanej kolejności z Pauliną na 1. miejscu
+      const STORAGE_KEY = 'grafik_grudzien_2026_v3_paulina';
+
       // =================================================================
-      // 1. KONFIGURACJA PRACOWNIKÓW (Kolory kropek zgodne z arkuszem)
+      // 1. ZESPÓŁ — OBOWIĄZKOWA KOLEJNOŚĆ (PAULINA #1, JUSTYNA #3)
       // =================================================================
       const EMPLOYEES = [
-        { id: 'justyna', name: 'Justyna', accent: '#5C7A29' },   // Oliwkowy zielony
-        { id: 'kasia',   name: 'Kasia P.', accent: '#9B7EBD' },  // Lawendowy
-        { id: 'paulina', name: 'Paulina', accent: '#4B7BEC' },   // Niebieski
-        { id: 'alina',   name: 'Alina', accent: '#E58E73' },     // Brzoskwiniowy / łososiowy
-        { id: 'alicja',  name: 'Alicja', accent: '#E06D6D' },    // Koralowy
+        { id: 'paulina', name: 'Paulina',         shortName: 'Paulina',  accent: '#1E88E5', role: 'Salon • #1', isPrimary: true },
+        { id: 'kasia',   name: 'Kasia P.',        shortName: 'Kasia P.', accent: '#8E44AD', role: 'Salon' },
+        { id: 'justyna', name: 'Justyna',         shortName: 'Justyna',  accent: '#2E7D32', role: 'Salon' },
+        { id: 'alina',   name: 'Alina',           shortName: 'Alina',    accent: '#E64A19', role: 'Salon / KATO' },
+        { id: 'alicja',  name: 'Alicja',          shortName: 'Alicja',   accent: '#F59E7B', role: 'Salon' },
+        { id: 'dorota',  name: 'Krawcowa Dorota', shortName: 'Dorota',   accent: '#C9A87C', role: 'Pracownia' },
+        { id: 'hanna',   name: 'Krawcowa Hanna',  shortName: 'Hanna',    accent: '#D4A017', role: 'Pracownia' },
       ];
 
       // =================================================================
-      // 2. KOMPLETNE DANE GRAFIKU — GRUDZIEŃ 2026 (1–23 grudnia)
+      // 2. KOMPLETNY HARMONOGRAM: 1–31 GRUDNIA 2026 (7 OSÓB)
       // =================================================================
       const INITIAL_SCHEDULE = [
+        // --- TYDZIEŃ 1 ---
         {
-          day: 1, dateLabel: '1. wtorek', week: 1, isSunday: false,
+          day: 1, dateLabel: '1. wtorek', week: 1, isHolidayRow: false,
           shifts: {
-            justyna: { label: 'WARSZAWA', hours: 8, type: 'event' },
-            kasia:   { label: '11-20', hours: 8, type: 'work' },
             paulina: { label: '11-20', hours: 8, type: 'work' },
-            alina:   { label: 'Urlop W.', hours: 2, type: 'vacation' },
+            kasia:   { label: '11-20', hours: 8, type: 'work' },
+            justyna: { label: 'WARSZAWA', hours: 8, type: 'warszawa' },
+            alina:   { label: 'Urlop W.', hours: 2, type: 'urlop' },
             alicja:  { label: '11-20', hours: 8, type: 'work' },
+            dorota:  { label: '10-20', hours: 10, type: 'work' },
+            hanna:   { label: '10-18', hours: 8, type: 'work' },
           },
         },
         {
-          day: 2, dateLabel: '2. środa', week: 1, isSunday: false,
+          day: 2, dateLabel: '2. środa', week: 1, isHolidayRow: false,
           shifts: {
-            justyna: { label: 'Wolne', hours: 0, type: 'off-red' },
-            kasia:   { label: 'Wolne', hours: 0, type: 'off-red' },
             paulina: { label: '11-20', hours: 8, type: 'work' },
+            kasia:   { label: 'Wolne', hours: 0, type: 'off', tone: 'maroon' },
+            justyna: { label: 'Wolne', hours: 0, type: 'off', tone: 'maroon' },
+            alina:   { label: 'Urlop W.', hours: 8, type: 'urlop' },
+            alicja:  { label: '11-20', hours: 8, type: 'work' },
+            dorota:  { label: '10-20', hours: 10, type: 'work' },
+            hanna:   { label: 'Wolne', hours: 0, type: 'off', tone: 'maroon' },
+          },
+        },
+        {
+          day: 3, dateLabel: '3. czwartek', week: 1, isHolidayRow: false,
+          shifts: {
+            paulina: { label: 'Wolne', hours: 0, type: 'off', tone: 'maroon' },
+            kasia:   { label: '11-20', hours: 8, type: 'work' },
+            justyna: { label: 'Wolne', hours: 0, type: 'off', tone: 'maroon' },
+            alina:   { label: '11-20', hours: 8, type: 'work' },
+            alicja:  { label: 'Wolne', hours: 0, type: 'off', tone: 'maroon' },
+            dorota:  { label: '10-20', hours: 10, type: 'work' },
+            hanna:   { label: 'Wolne', hours: 0, type: 'off', tone: 'maroon' },
+          },
+        },
+        {
+          day: 4, dateLabel: '4. piątek', week: 1, isHolidayRow: false,
+          shifts: {
+            paulina: { label: '11-20', hours: 8, type: 'work' },
+            kasia:   { label: 'Wolne', hours: 0, type: 'off', tone: 'maroon' },
+            justyna: { label: '11-20', hours: 8, type: 'work' },
+            alina:   { label: '11-19 KATO', hours: 8, type: 'kato' },
+            alicja:  { label: '11-20', hours: 8, type: 'work' },
+            dorota:  { label: 'Wolne', hours: 0, type: 'off', tone: 'maroon' },
+            hanna:   { label: '10-18', hours: 8, type: 'work' },
+          },
+        },
+        {
+          day: 5, dateLabel: '5. sobota', week: 1, isHolidayRow: false,
+          shifts: {
+            paulina: { label: 'Wolne', hours: 0, type: 'off', tone: 'navy' },
+            kasia:   { label: '11-20', hours: 8, type: 'work' },
+            justyna: { label: '11-20', hours: 8, type: 'work' },
+            alina:   { label: '11-19 KATO', hours: 8, type: 'kato' },
+            alicja:  { label: '11-20', hours: 8, type: 'work' },
+            dorota:  { label: 'Wolne', hours: 0, type: 'off', tone: 'maroon' },
+            hanna:   { label: '10-18', hours: 8, type: 'work' },
+          },
+        },
+        {
+          day: 6, dateLabel: '6. niedziela', week: 1, isHolidayRow: true,
+          holidayText: 'NIEDZIELA — DZIEŃ WOLNY',
+          shifts: {},
+        },
+
+        // --- TYDZIEŃ 2 ---
+        {
+          day: 7, dateLabel: '7. poniedziałek', week: 2, isHolidayRow: false,
+          shifts: {
+            paulina: { label: 'Wolne', hours: 0, type: 'off', tone: 'maroon' },
+            kasia:   { label: 'Wolne', hours: 0, type: 'off', tone: 'red' },
+            justyna: { label: 'Wolne', hours: 0, type: 'off', tone: 'maroon' },
+            alina:   { label: 'Wolne', hours: 0, type: 'off', tone: 'maroon' },
+            alicja:  { label: '11-20', hours: 8, type: 'work' },
+            dorota:  { label: 'Wolne', hours: 0, type: 'off', tone: 'maroon' },
+            hanna:   { label: '10-18', hours: 8, type: 'work' },
+          },
+        },
+        {
+          day: 8, dateLabel: '8. wtorek', week: 2, isHolidayRow: false,
+          shifts: {
+            paulina: { label: 'Wolne', hours: 0, type: 'off', tone: 'maroon' },
+            kasia:   { label: '11-20', hours: 8, type: 'work' },
+            justyna: { label: 'Urlop W.', hours: 8, type: 'urlop' },
             alina:   { label: '11-20', hours: 8, type: 'work' },
             alicja:  { label: '11-20', hours: 8, type: 'work' },
+            dorota:  { label: '10-20', hours: 10, type: 'work' },
+            hanna:   { label: '10-18', hours: 8, type: 'work' },
           },
         },
         {
-          day: 3, dateLabel: '3. czwartek', week: 1, isSunday: false,
+          day: 9, dateLabel: '9. środa', week: 2, isHolidayRow: false,
           shifts: {
-            justyna: { label: 'Wolne', hours: 0, type: 'off-red' },
-            kasia:   { label: '11-20', hours: 8, type: 'work-red' },
-            paulina: { label: 'Wolne', hours: 0, type: 'off-red' },
-            alina:   { label: 'Urlop W.', hours: 8, type: 'vacation' },
-            alicja:  { label: 'Wolne', hours: 0, type: 'off-red' },
-          },
-        },
-        {
-          day: 4, dateLabel: '4. piątek', week: 1, isSunday: false,
-          shifts: {
-            justyna: { label: '11-20', hours: 8, type: 'work' },
-            kasia:   { label: 'Wolne', hours: 0, type: 'off-navy' },
             paulina: { label: '11-20', hours: 8, type: 'work' },
-            alina:   { label: '11-19 KATO', hours: 8, type: 'kato' },
-            alicja:  { label: '11-20', hours: 8, type: 'work' },
+            kasia:   { label: 'Wolne', hours: 0, type: 'off', tone: 'maroon' },
+            justyna: { label: 'Urlop W.', hours: 8, type: 'urlop' },
+            alina:   { label: '11-20', hours: 8, type: 'work' },
+            alicja:  { label: 'Wolne', hours: 0, type: 'off', tone: 'maroon' },
+            dorota:  { label: '10-20', hours: 10, type: 'work' },
+            hanna:   { label: 'Wolne', hours: 0, type: 'off', tone: 'maroon' },
           },
         },
         {
-          day: 5, dateLabel: '5. sobota', week: 1, isSunday: false,
+          day: 10, dateLabel: '10. czwartek', week: 2, isHolidayRow: false,
           shifts: {
-            justyna: { label: '11-20', hours: 8, type: 'work' },
-            kasia:   { label: '11-20', hours: 8, type: 'work' },
-            paulina: { label: 'Wolne', hours: 0, type: 'off-navy' },
+            paulina: { label: 'Wolne', hours: 0, type: 'off', tone: 'navy' },
+            kasia:   { label: 'Wolne', hours: 0, type: 'off', tone: 'red' },
+            justyna: { label: 'Wolne', hours: 0, type: 'off', tone: 'red' },
             alina:   { label: '11-19 KATO', hours: 8, type: 'kato' },
             alicja:  { label: '11-20', hours: 8, type: 'work' },
+            dorota:  { label: '10-20', hours: 10, type: 'work' },
+            hanna:   { label: 'Wolne', hours: 0, type: 'off', tone: 'maroon' },
           },
         },
         {
-          day: 6, dateLabel: '6. niedziela', week: 1, isSunday: true,
-          sundayText: 'NIEDZIELA — DZIEŃ WOLNY',
+          day: 11, dateLabel: '11. piątek', week: 2, isHolidayRow: false,
+          shifts: {
+            paulina: { label: 'Wolne', hours: 0, type: 'off', tone: 'navy' },
+            kasia:   { label: '11-20', hours: 8, type: 'work' },
+            justyna: { label: '11-20', hours: 8, type: 'work' },
+            alina:   { label: 'Wolne', hours: 0, type: 'off', tone: 'navy' },
+            alicja:  { label: '11-20', hours: 8, type: 'work' },
+            dorota:  { label: 'Wolne', hours: 0, type: 'off', tone: 'maroon' },
+            hanna:   { label: '10-18', hours: 8, type: 'work' },
+          },
+        },
+        {
+          day: 12, dateLabel: '12. sobota', week: 2, isHolidayRow: false,
+          shifts: {
+            paulina: { label: '11-20', hours: 8, type: 'work' },
+            kasia:   { label: 'Wolne', hours: 0, type: 'off', tone: 'maroon' },
+            justyna: { label: '11-20', hours: 8, type: 'work' },
+            alina:   { label: '11-19 KATO', hours: 8, type: 'kato' },
+            alicja:  { label: '11-20', hours: 8, type: 'work' },
+            dorota:  { label: 'Wolne', hours: 0, type: 'off', tone: 'maroon' },
+            hanna:   { label: '10-18', hours: 8, type: 'work' },
+          },
+        },
+        {
+          day: 13, dateLabel: '13. niedziela', week: 2, isHolidayRow: true,
+          holidayText: 'NIEDZIELA — DZIEŃ WOLNY',
+          shifts: {},
+        },
+
+        // --- TYDZIEŃ 3 ---
+        {
+          day: 14, dateLabel: '14. poniedziałek', week: 3, isHolidayRow: false,
+          shifts: {
+            paulina: { label: '11-20 Szkolenie', hours: 8, type: 'szkolenie' },
+            kasia:   { label: '11-20 Szkolenie', hours: 8, type: 'szkolenie' },
+            justyna: { label: '11-20 Szkolenie', hours: 8, type: 'szkolenie' },
+            alina:   { label: '11-20 Szkolenie', hours: 8, type: 'szkolenie' },
+            alicja:  { label: '11-20', hours: 8, type: 'work' },
+            dorota:  { label: 'Wolne', hours: 0, type: 'off', tone: 'maroon' },
+            hanna:   { label: '10-18', hours: 8, type: 'work' },
+          },
+        },
+        {
+          day: 15, dateLabel: '15. wtorek', week: 3, isHolidayRow: false,
+          shifts: {
+            paulina: { label: 'Wolne', hours: 0, type: 'off', tone: 'maroon' },
+            kasia:   { label: '11-20', hours: 8, type: 'work' },
+            justyna: { label: '11-20', hours: 8, type: 'work' },
+            alina:   { label: 'Wolne', hours: 0, type: 'off', tone: 'navy' },
+            alicja:  { label: '11-20', hours: 8, type: 'work' },
+            dorota:  { label: '10-20', hours: 10, type: 'work' },
+            hanna:   { label: '10-18', hours: 8, type: 'work' },
+          },
+        },
+        {
+          day: 16, dateLabel: '16. środa', week: 3, isHolidayRow: false,
+          shifts: {
+            paulina: { label: 'Wolne', hours: 0, type: 'off', tone: 'maroon' },
+            kasia:   { label: 'Urlop W.', hours: 8, type: 'urlop' },
+            justyna: { label: 'Wolne', hours: 0, type: 'off', tone: 'red' },
+            alina:   { label: '11-19 KATO', hours: 8, type: 'kato' },
+            alicja:  { label: '11-20', hours: 8, type: 'work' },
+            dorota:  { label: '10-20', hours: 10, type: 'work' },
+            hanna:   { label: 'Wolne', hours: 0, type: 'off', tone: 'maroon' },
+          },
+        },
+        {
+          day: 17, dateLabel: '17. czwartek', week: 3, isHolidayRow: false,
+          shifts: {
+            paulina: { label: 'Wolne', hours: 0, type: 'off', tone: 'maroon' },
+            kasia:   { label: 'Urlop W.', hours: 8, type: 'urlop' },
+            justyna: { label: 'Wolne', hours: 0, type: 'off', tone: 'red' },
+            alina:   { label: 'Wolne', hours: 0, type: 'off', tone: 'red' },
+            alicja:  { label: 'Wolne', hours: 0, type: 'off', tone: 'maroon' },
+            dorota:  { label: '10-20', hours: 10, type: 'work' },
+            hanna:   { label: 'Wolne', hours: 0, type: 'off', tone: 'maroon' },
+          },
+        },
+        {
+          day: 18, dateLabel: '18. piątek', week: 3, isHolidayRow: false,
+          shifts: {
+            paulina: { label: '11-20', hours: 8, type: 'work' },
+            kasia:   { label: 'Urlop W.', hours: 2.5, type: 'urlop' },
+            justyna: { label: '11-20', hours: 8, type: 'work' },
+            alina:   { label: 'Wolne', hours: 0, type: 'off', tone: 'red' },
+            alicja:  { label: 'WARSZAWA', hours: 8, type: 'warszawa' },
+            dorota:  { label: 'Wolne', hours: 0, type: 'off', tone: 'maroon' },
+            hanna:   { label: '10-18', hours: 8, type: 'work' },
+          },
+        },
+        {
+          day: 19, dateLabel: '19. sobota', week: 3, isHolidayRow: false,
+          shifts: {
+            paulina: { label: 'Wolne', hours: 0, type: 'off', tone: 'navy' },
+            kasia:   { label: '11-20', hours: 8, type: 'work' },
+            justyna: { label: '11-20', hours: 8, type: 'work' },
+            alina:   { label: '11-19 KATO', hours: 8, type: 'kato' },
+            alicja:  { label: '11-20', hours: 8, type: 'work' },
+            dorota:  { label: 'Wolne', hours: 0, type: 'off', tone: 'maroon' },
+            hanna:   { label: '10-18', hours: 8, type: 'work' },
+          },
+        },
+        {
+          day: 20, dateLabel: '20. niedziela', week: 3, isHolidayRow: true,
+          holidayText: 'NIEDZIELA — DZIEŃ WOLNY',
+          shifts: {},
+        },
+
+        // --- TYDZIEŃ 4 (ŚWIĄTECZNY) ---
+        {
+          day: 21, dateLabel: '21. poniedziałek', week: 4, isHolidayRow: false,
+          shifts: {
+            paulina: { label: '11-20', hours: 8, type: 'work' },
+            kasia:   { label: 'Wolne', hours: 0, type: 'off', tone: 'navy' },
+            justyna: { label: '11-20', hours: 8, type: 'work' },
+            alina:   { label: '11-19 KATO', hours: 8, type: 'kato' },
+            alicja:  { label: '11-20', hours: 8, type: 'work' },
+            dorota:  { label: 'Wolne', hours: 0, type: 'off', tone: 'maroon' },
+            hanna:   { label: 'Urlop W.', hours: 8, type: 'urlop' },
+          },
+        },
+        {
+          day: 22, dateLabel: '22. wtorek', week: 4, isHolidayRow: false,
+          shifts: {
+            paulina: { label: 'Wolne', hours: 0, type: 'off', tone: 'navy' },
+            kasia:   { label: 'Wolne', hours: 0, type: 'off', tone: 'navy' },
+            justyna: { label: '11-20', hours: 8, type: 'work' },
+            alina:   { label: '11-20', hours: 8, type: 'work' },
+            alicja:  { label: '11-20', hours: 8, type: 'work' },
+            dorota:  { label: '10-20', hours: 10, type: 'work' },
+            hanna:   { label: '10-18', hours: 8, type: 'work' },
+          },
+        },
+        {
+          day: 23, dateLabel: '23. środa', week: 4, isHolidayRow: false,
+          shifts: {
+            paulina: { label: 'Wolne', hours: 0, type: 'off', tone: 'navy' },
+            kasia:   { label: 'Wolne', hours: 0, type: 'off', tone: 'red' },
+            justyna: { label: '11-20', hours: 8, type: 'work' },
+            alina:   { label: '11-20', hours: 8, type: 'work' },
+            alicja:  { label: '11-20', hours: 8, type: 'work' },
+            dorota:  { label: '10-20', hours: 10, type: 'work' },
+            hanna:   { label: 'Wolne', hours: 0, type: 'off', tone: 'maroon' },
+          },
+        },
+        {
+          day: 24, dateLabel: '24. czwartek', week: 4, isHolidayRow: true,
+          holidayText: 'WIGILIA — PRZERWA ŚWIĄTECZNA',
           shifts: {},
         },
         {
-          day: 7, dateLabel: '7. poniedziałek', week: 2, isSunday: false,
-          shifts: {
-            justyna: { label: 'Wolne', hours: 0, type: 'off-red' },
-            kasia:   { label: '11-20', hours: 8, type: 'work-red' },
-            paulina: { label: 'Wolne', hours: 0, type: 'off-red' },
-            alina:   { label: 'Wolne', hours: 0, type: 'off-red' },
-            alicja:  { label: '11-20', hours: 8, type: 'work' },
-          },
-        },
-        {
-          day: 8, dateLabel: '8. wtorek', week: 2, isSunday: false,
-          shifts: {
-            justyna: { label: 'Urlop W.', hours: 8, type: 'vacation' },
-            kasia:   { label: '11-20', hours: 8, type: 'work' },
-            paulina: { label: 'Wolne', hours: 0, type: 'off-navy' },
-            alina:   { label: '11-20', hours: 8, type: 'work' },
-            alicja:  { label: '11-20', hours: 8, type: 'work' },
-          },
-        },
-        {
-          day: 9, dateLabel: '9. środa', week: 2, isSunday: false,
-          shifts: {
-            justyna: { label: 'Urlop W.', hours: 8, type: 'vacation' },
-            kasia:   { label: 'Wolne', hours: 0, type: 'off-red' },
-            paulina: { label: '11-20', hours: 8, type: 'work' },
-            alina:   { label: '11-20', hours: 8, type: 'work' },
-            alicja:  { label: 'Wolne', hours: 0, type: 'off-red' },
-          },
-        },
-        {
-          day: 10, dateLabel: '10. czwartek', week: 2, isSunday: false,
-          shifts: {
-            justyna: { label: 'Wolne', hours: 0, type: 'off-red' },
-            kasia:   { label: '11-20', hours: 8, type: 'work-red' },
-            paulina: { label: 'Wolne', hours: 0, type: 'off-navy' },
-            alina:   { label: '11-19 KATO', hours: 8, type: 'kato' },
-            alicja:  { label: '11-20', hours: 8, type: 'work' },
-          },
-        },
-        {
-          day: 11, dateLabel: '11. piątek', week: 2, isSunday: false,
-          shifts: {
-            justyna: { label: '11-20', hours: 8, type: 'work' },
-            kasia:   { label: '11-20', hours: 8, type: 'work' },
-            paulina: { label: 'Wolne', hours: 0, type: 'off-navy' },
-            alina:   { label: 'Wolne', hours: 0, type: 'off-navy' },
-            alicja:  { label: '11-20', hours: 8, type: 'work' },
-          },
-        },
-        {
-          day: 12, dateLabel: '12. sobota', week: 2, isSunday: false,
-          shifts: {
-            justyna: { label: '11-20', hours: 8, type: 'work' },
-            kasia:   { label: 'Wolne', hours: 0, type: 'off-navy' },
-            paulina: { label: '11-20', hours: 8, type: 'work' },
-            alina:   { label: '11-19 KATO', hours: 8, type: 'kato' },
-            alicja:  { label: '11-20', hours: 8, type: 'work' },
-          },
-        },
-        {
-          day: 13, dateLabel: '13. niedziela', week: 2, isSunday: true,
-          sundayText: 'NIEDZIELA — DZIEŃ WOLNY',
+          day: 25, dateLabel: '25. piątek', week: 4, isHolidayRow: true,
+          holidayText: 'BOŻE NARODZENIE I — PRZERWA ŚWIĄTECZNA',
           shifts: {},
         },
         {
-          day: 14, dateLabel: '14. poniedziałek', week: 3, isSunday: false,
-          shifts: {
-            justyna: { label: '11-20 Szkolenie', hours: 8, type: 'event' },
-            kasia:   { label: '11-20 Szkolenie', hours: 8, type: 'event' },
-            paulina: { label: '11-20 Szkolenie', hours: 8, type: 'event' },
-            alina:   { label: '11-20 Szkolenie', hours: 8, type: 'event' },
-            alicja:  { label: '11-20', hours: 8, type: 'work' },
-          },
-        },
-        {
-          day: 15, dateLabel: '15. wtorek', week: 3, isSunday: false,
-          shifts: {
-            justyna: { label: '11-20', hours: 8, type: 'work' },
-            kasia:   { label: '11-20', hours: 8, type: 'work' },
-            paulina: { label: 'Wolne', hours: 0, type: 'off-red' },
-            alina:   { label: 'Wolne', hours: 0, type: 'off-navy' },
-            alicja:  { label: '11-20', hours: 8, type: 'work' },
-          },
-        },
-        {
-          day: 16, dateLabel: '16. środa', week: 3, isSunday: false,
-          shifts: {
-            justyna: { label: '11-20', hours: 8, type: 'work-red' },
-            kasia:   { label: 'Urlop W.', hours: 8, type: 'vacation' },
-            paulina: { label: 'Wolne', hours: 0, type: 'off-red' },
-            alina:   { label: '11-19 KATO', hours: 8, type: 'kato' },
-            alicja:  { label: '11-20', hours: 8, type: 'work' },
-          },
-        },
-        {
-          day: 17, dateLabel: '17. czwartek', week: 3, isSunday: false,
-          shifts: {
-            justyna: { label: 'Wolne', hours: 0, type: 'off-red' },
-            kasia:   { label: 'Urlop W.', hours: 8, type: 'vacation' },
-            paulina: { label: 'Wolne', hours: 0, type: 'off-red' },
-            alina:   { label: '11-20', hours: 8, type: 'work-red' },
-            alicja:  { label: '11-20', hours: 8, type: 'work' },
-          },
-        },
-        {
-          day: 18, dateLabel: '18. piątek', week: 3, isSunday: false,
-          shifts: {
-            justyna: { label: '11-20', hours: 8, type: 'work' },
-            kasia:   { label: 'Urlop W.', hours: 2.5, type: 'vacation' },
-            paulina: { label: '11-20', hours: 8, type: 'work' },
-            alina:   { label: '11-20', hours: 8, type: 'work-red' },
-            alicja:  { label: '11-20', hours: 8, type: 'work' },
-          },
-        },
-        {
-          day: 19, dateLabel: '19. sobota', week: 3, isSunday: false,
-          shifts: {
-            justyna: { label: '11-20', hours: 8, type: 'work' },
-            kasia:   { label: '11-20', hours: 8, type: 'work' },
-            paulina: { label: 'Wolne', hours: 0, type: 'off-navy' },
-            alina:   { label: '11-19 KATO', hours: 8, type: 'kato' },
-            alicja:  { label: '11-20', hours: 8, type: 'work' },
-          },
-        },
-        {
-          day: 20, dateLabel: '20. niedziela', week: 3, isSunday: true,
-          sundayText: 'NIEDZIELA — DZIEŃ WOLNY',
+          day: 26, dateLabel: '26. sobota', week: 4, isHolidayRow: true,
+          holidayText: 'BOŻE NARODZENIE II — PRZERWA ŚWIĄTECZNA',
           shifts: {},
         },
         {
-          day: 21, dateLabel: '21. poniedziałek', week: 4, isSunday: false,
+          day: 27, dateLabel: '27. niedziela', week: 4, isHolidayRow: true,
+          holidayText: 'NIEDZIELA — DZIEŃ WOLNY',
+          shifts: {},
+        },
+
+        // --- TYDZIEŃ 5 (SYLWESTROWY) ---
+        {
+          day: 28, dateLabel: '28. poniedziałek', week: 5, isHolidayRow: false,
           shifts: {
-            justyna: { label: '11-20', hours: 8, type: 'work' },
-            kasia:   { label: 'Wolne', hours: 0, type: 'off-navy' },
             paulina: { label: '11-20', hours: 8, type: 'work' },
+            kasia:   { label: 'Wolne', hours: 0, type: 'off', tone: 'navy' },
+            justyna: { label: 'WARSZAWA', hours: 8, type: 'warszawa' },
             alina:   { label: '11-19 KATO', hours: 8, type: 'kato' },
             alicja:  { label: '11-20', hours: 8, type: 'work' },
+            dorota:  { label: '10-20', hours: 10, type: 'work' },
+            hanna:   { label: '10-18', hours: 8, type: 'work' },
           },
         },
         {
-          day: 22, dateLabel: '22. wtorek', week: 4, isSunday: false,
+          day: 29, dateLabel: '29. wtorek', week: 5, isHolidayRow: false,
           shifts: {
-            justyna: { label: '11-20', hours: 8, type: 'work' },
-            kasia:   { label: 'Wolne', hours: 0, type: 'off-navy' },
-            paulina: { label: 'Wolne', hours: 0, type: 'off-navy' },
-            alina:   { label: '11-20', hours: 8, type: 'work' },
+            paulina: { label: 'Wolne', hours: 0, type: 'off', tone: 'navy' },
+            kasia:   { label: '11-20', hours: 8, type: 'work' },
+            justyna: { label: 'WARSZAWA', hours: 8, type: 'warszawa' },
+            alina:   { label: '11-19 KATO', hours: 8, type: 'kato' },
             alicja:  { label: '11-20', hours: 8, type: 'work' },
+            dorota:  { label: '10-20', hours: 10, type: 'work' },
+            hanna:   { label: '10-18', hours: 8, type: 'work' },
           },
         },
         {
-          day: 23, dateLabel: '23. środa', week: 4, isSunday: false,
+          day: 30, dateLabel: '30. środa', week: 5, isHolidayRow: false,
           shifts: {
+            paulina: { label: 'Wolne', hours: 0, type: 'off', tone: 'navy' },
+            kasia:   { label: 'Wolne', hours: 0, type: 'off', tone: 'red' },
             justyna: { label: '11-20', hours: 8, type: 'work' },
-            kasia:   { label: 'Wolne', hours: 0, type: 'off-red' },
-            paulina: { label: 'Wolne', hours: 0, type: 'off-navy' },
             alina:   { label: '11-20', hours: 8, type: 'work' },
-            alicja:  { label: '11-20', hours: 8, type: 'work' },
+            alicja:  { label: 'Wolne', hours: 0, type: 'off', tone: 'maroon' },
+            dorota:  { label: '10-20', hours: 10, type: 'work' },
+            hanna:   { label: 'Wolne', hours: 0, type: 'off', tone: 'maroon' },
+          },
+        },
+        {
+          day: 31, dateLabel: '31. czwartek (Sylwester)', week: 5, isHolidayRow: false, isNewYearsEve: true,
+          shifts: {
+            paulina: { label: 'Do ustalenia', hours: 0, type: 'off', tone: 'navy' },
+            kasia:   { label: 'Do ustalenia', hours: 0, type: 'off', tone: 'navy' },
+            justyna: { label: 'Do ustalenia', hours: 0, type: 'off', tone: 'navy' },
+            alina:   { label: 'Do ustalenia', hours: 0, type: 'off', tone: 'navy' },
+            alicja:  { label: 'Do ustalenia', hours: 0, type: 'off', tone: 'navy' },
+            dorota:  { label: 'Do ustalenia', hours: 0, type: 'off', tone: 'navy' },
+            hanna:   { label: 'Do ustalenia', hours: 0, type: 'off', tone: 'navy' },
           },
         },
       ];
 
       // =================================================================
-      // 3. STAN APLIKACJI
+      // 3. STAN APLIKACJI I FILTRY
       // =================================================================
-      let scheduleData = deepClone(INITIAL_SCHEDULE);
-      let isEditMode = false;
-      let hasUnsavedEdits = false;
-      let activePerson = 'all';     // 'all' | employeeId
-      let activeStatus = 'all';     // 'all' | 'work' | 'kato' | 'event' | 'vacation' | 'off'
-      let activeWeek = 'all';       // 'all' | '1' | '2' | '3' | '4'
-      let editingTarget = null;     // { dayIndex, empId }
+      let scheduleData = loadFromStorage();
+      let isEditMode = true;
+      let hasCustomChanges = checkIfModified();
+      let activePerson = 'all';
+      let activeStatus = 'all';
+      let activeWeek = 'all';
+      let editingTarget = null;
 
-      // Definicje opcji filtrów
       const STATUS_FILTERS = [
-        { id: 'all',      label: 'Wszystkie' },
-        { id: 'work',     label: 'Zmiany (11-20)' },
-        { id: 'kato',     label: 'Katowice' },
-        { id: 'event',    label: 'Szkolenie / Delegacja' },
-        { id: 'vacation', label: 'Urlop W.' },
-        { id: 'off',      label: 'Wolne' },
+        { id: 'all',           label: 'Wszystkie' },
+        { id: 'work',          label: 'Praca' },
+        { id: 'urlop',         label: 'Urlop W.' },
+        { id: 'szkolenie_waw', label: 'Szkolenie i Warszawa' },
+        { id: 'kato',          label: 'KATO' },
+        { id: 'pracownia',     label: 'Pracownia' },
+        { id: 'off',           label: 'Wolne i Święta' },
       ];
 
       const WEEK_FILTERS = [
-        { id: 'all', label: 'Cały grudzień' },
+        { id: 'all', label: 'Cały miesiąc (1–31)' },
         { id: '1',   label: 'Tydz. 1 (1–6)' },
         { id: '2',   label: 'Tydz. 2 (7–13)' },
         { id: '3',   label: 'Tydz. 3 (14–20)' },
-        { id: '4',   label: 'Tydz. 4 (21–23)' },
+        { id: '4',   label: 'Tydz. 4 • Święta (21–27)' },
+        { id: '5',   label: 'Tydz. 5 • Sylwester (28–31)' },
       ];
 
-      // =================================================================
-      // 4. FUNKCJE POMOCNICZE
-      // =================================================================
       function deepClone(obj) {
         return JSON.parse(JSON.stringify(obj));
       }
 
-      // Formatowanie godzin w stylu polskim: 8 -> "8,00h", 2.5 -> "2,50h"
+      function loadFromStorage() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (!raw) return deepClone(INITIAL_SCHEDULE);
+          const parsed = JSON.parse(raw);
+          if (Array.isArray(parsed) && parsed.length === 31) return parsed;
+          return deepClone(INITIAL_SCHEDULE);
+        } catch (err) {
+          return deepClone(INITIAL_SCHEDULE);
+        }
+      }
+
+      function saveToStorage() {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(scheduleData));
+        } catch (err) {}
+      }
+
+      function checkIfModified() {
+        return JSON.stringify(scheduleData) !== JSON.stringify(INITIAL_SCHEDULE);
+      }
+
+      // =================================================================
+      // 4. FORMATOWANIE I STYLE KOMÓREK
+      // =================================================================
       function formatHours(num) {
-        return Number(num).toFixed(2).replace('.', ',') + 'h';
+        return Number(num).toFixed(2).replace('.', ',') + ' h';
       }
 
       function formatHoursCompact(num) {
         const rounded = Math.round(num * 100) / 100;
-        return String(rounded).replace('.', ',') + 'h';
+        return String(rounded).replace('.', ',') + ' h';
       }
 
-      // Sprawdzanie dopasowania typu zmiany do aktywnego filtra statusu
-      function matchesStatusFilter(shiftType, filterId) {
-        if (filterId === 'all') return true;
-        if (filterId === 'work') return shiftType === 'work' || shiftType === 'work-red';
-        if (filterId === 'kato') return shiftType === 'kato';
-        if (filterId === 'event') return shiftType === 'event';
-        if (filterId === 'vacation') return shiftType === 'vacation';
-        if (filterId === 'off') return shiftType === 'off-red' || shiftType === 'off-navy';
-        return true;
-      }
-
-      // Style odznak dla każdego typu zmiany (zgodne z arkuszem i estetyką editorialową)
-      function getShiftBadgeStyle(type) {
-        switch (type) {
-          case 'work':
-            return 'bg-[#F8F8F8] text-editorialInk border border-editorialLine';
-          case 'work-red':
-            return 'bg-[#DC2626] text-white border border-[#B91C1C]';
-          case 'kato':
-            return 'bg-amber-50 text-amber-950 border border-amber-400';
-          case 'event':
-            return 'bg-purple-600 text-white border border-purple-700';
-          case 'vacation':
-            return 'bg-sky-500 text-white border border-sky-600';
-          case 'off-red':
-            return 'bg-[#7F1D1D] text-white/90 border border-[#681616]';
-          case 'off-navy':
-            return 'bg-[#334155] text-white/90 border border-[#1E293B]';
-          default:
-            return 'bg-gray-100 text-editorialInk border border-gray-300';
+      function getShiftBadgeStyle(shift, empId, dayNum) {
+        const type = shift.type;
+        if (type === 'work') {
+          if (empId === 'dorota') {
+            return 'bg-[#EFE3D0] text-editorialInk border border-[#D4C0A1]';
+          }
+          if (empId === 'hanna') {
+            return 'bg-[#F4D03F] text-editorialInk border border-[#D4B020]';
+          }
+          return 'bg-white text-editorialInk border border-editorialLine';
         }
+        if (type === 'warszawa' || type === 'szkolenie') {
+          return 'bg-[#D966FF] text-white border border-[#B946E0]';
+        }
+        if (type === 'urlop') {
+          return 'bg-[#1E88E5] text-white border border-[#1565C0]';
+        }
+        if (type === 'kato') {
+          return 'bg-amber-50 text-amber-950 border border-amber-500';
+        }
+        if (type === 'off') {
+          if (dayNum === 31) {
+            return 'bg-[#2F3640] text-white/95 border border-[#1E242B]';
+          }
+          if (shift.tone === 'navy') {
+            return 'bg-[#2D3A4F] text-white/90 border border-[#1E2838]';
+          }
+          if (shift.tone === 'red') {
+            return 'bg-[#B7282E] text-white/95 border border-[#8F1B20]';
+          }
+          return 'bg-[#4A1C1C] text-white/90 border border-[#381414]';
+        }
+        return 'bg-gray-100 text-editorialInk border border-gray-300';
       }
 
-      // Wyświetlanie powiadomienia Toast (bez alert())
+      function matchesStatusFilter(shiftType, empId, filterId) {
+        if (filterId === 'all') return true;
+        if (filterId === 'szkolenie_waw') return shiftType === 'szkolenie' || shiftType === 'warszawa';
+        if (filterId === 'pracownia') return (empId === 'dorota' || empId === 'hanna') && shiftType !== 'off';
+        return shiftType === filterId;
+      }
+
       function showToast(message) {
         const container = document.getElementById('toastContainer');
         const toast = document.createElement('div');
@@ -1044,59 +1116,74 @@
         setTimeout(() => {
           toast.classList.add('opacity-0', 'translate-y-2');
           setTimeout(() => toast.remove(), 300);
-        }, 2800);
+        }, 2600);
       }
 
       // =================================================================
       // 5. OBLICZANIE STATYSTYK ZESPOŁU
       // =================================================================
-      function computeEmployeeStats() {
-        const stats = {};
+      function computeStats() {
+        const byEmp = {};
         EMPLOYEES.forEach((emp) => {
-          stats[emp.id] = {
+          byEmp[emp.id] = {
             ...emp,
-            workHours: 0,       // Suma godzin roboczych (work, work-red, kato, event)
-            vacationHours: 0,   // Suma godzin urlopowych
-            shiftCount: 0,      // Liczba dni pracujących
-            katoCount: 0,       // Liczba zmian w Katowicach
-            eventCount: 0,      // Liczba szkoleń / delegacji
-            vacationDays: [],   // Lista dat urlopowych (np. "08.12")
+            workHours: 0,
+            vacationHours: 0,
+            workDays: 0,
+            katoDays: 0,
+            warszawaDays: 0,
+            szkolenieDays: 0,
+            vacationDays: 0,
           };
         });
 
+        let totalTeamWorkHours = 0;
+        let totalTeamVacationHours = 0;
+        let totalKatoDays = 0;
+        let totalWarszawaDays = 0;
+        let totalSzkolenieSlots = 0;
+
         scheduleData.forEach((row) => {
-          if (row.isSunday) return;
+          if (row.isHolidayRow) return;
           EMPLOYEES.forEach((emp) => {
             const s = row.shifts[emp.id];
             if (!s) return;
-            const st = stats[emp.id];
+            const st = byEmp[emp.id];
             const hrs = Number(s.hours) || 0;
 
-            if (s.type === 'vacation') {
+            if (s.type === 'urlop') {
               st.vacationHours += hrs;
-              st.vacationDays.push(String(row.day).padStart(2, '0') + '.12');
-            } else if (s.type === 'work' || s.type === 'work-red' || s.type === 'kato' || s.type === 'event') {
+              st.vacationDays += 1;
+              totalTeamVacationHours += hrs;
+            } else if (s.type === 'work' || s.type === 'kato' || s.type === 'warszawa' || s.type === 'szkolenie') {
               st.workHours += hrs;
-              if (hrs > 0) st.shiftCount += 1;
-              if (s.type === 'kato') st.katoCount += 1;
-              if (s.type === 'event') st.eventCount += 1;
+              totalTeamWorkHours += hrs;
+              if (hrs > 0) st.workDays += 1;
+              if (s.type === 'kato') { st.katoDays += 1; totalKatoDays += 1; }
+              if (s.type === 'warszawa') { st.warszawaDays += 1; totalWarszawaDays += 1; }
+              if (s.type === 'szkolenie') { st.szkolenieDays += 1; totalSzkolenieSlots += 1; }
             }
           });
         });
 
-        return stats;
+        return {
+          byEmp,
+          totalTeamWorkHours,
+          totalTeamVacationHours,
+          totalKatoDays,
+          totalWarszawaDays,
+          totalSzkolenieSlots,
+        };
       }
 
       // =================================================================
-      // 6. RENDEROWANIE ELEMENTÓW INTERFEJSU
+      // 6. RENDEROWANIE FILTRÓW, TABELI, KPI I KART
       // =================================================================
-
-      // 6A. Renderowanie filtrów (Osoba / Status / Tydzień)
       function renderFilters() {
-        // Filtr Osób
-        const personContainer = document.getElementById('personFilterGroup');
-        const personOptions = [{ id: 'all', name: 'Wszyscy', accent: null }, ...EMPLOYEES];
-        personContainer.innerHTML = personOptions
+        // Osoby — Paulina na 1. miejscu
+        const personGroup = document.getElementById('personFilterGroup');
+        const personOptions = [{ id: 'all', name: 'Wszystkie (7)', accent: null }, ...EMPLOYEES];
+        personGroup.innerHTML = personOptions
           .map((p) => {
             const active = activePerson === p.id;
             const dot = p.accent
@@ -1106,10 +1193,12 @@
               <button
                 type="button"
                 data-person-filter="${p.id}"
-                class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
+                class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold transition-all ${
                   active
                     ? 'bg-editorialInk text-white shadow-sm'
-                    : 'bg-white text-editorialInk border border-editorialLine hover:border-editorialInk'
+                    : p.isPrimary
+                      ? 'bg-[#EBF4FD] text-editorialInk border border-[#1E88E5]/60 hover:border-[#1E88E5]'
+                      : 'bg-white text-editorialInk border border-editorialLine hover:border-editorialInk'
                 }"
               >
                 ${dot}
@@ -1119,15 +1208,15 @@
           })
           .join('');
 
-        // Filtr Statusów
-        const statusContainer = document.getElementById('statusFilterGroup');
-        statusContainer.innerHTML = STATUS_FILTERS.map((st) => {
+        // Statusy
+        const statusGroup = document.getElementById('statusFilterGroup');
+        statusGroup.innerHTML = STATUS_FILTERS.map((st) => {
           const active = activeStatus === st.id;
           return `
             <button
               type="button"
               data-status-filter="${st.id}"
-              class="px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
+              class="px-2.5 py-1 rounded-full text-[11px] font-semibold transition-all ${
                 active
                   ? 'bg-editorialRed text-white shadow-sm'
                   : 'bg-white text-editorialInk border border-editorialLine hover:border-editorialInk'
@@ -1138,15 +1227,15 @@
           `;
         }).join('');
 
-        // Filtr Tygodni
-        const weekContainer = document.getElementById('weekFilterGroup');
-        weekContainer.innerHTML = WEEK_FILTERS.map((wk) => {
+        // Tygodnie
+        const weekGroup = document.getElementById('weekFilterGroup');
+        weekGroup.innerHTML = WEEK_FILTERS.map((wk) => {
           const active = activeWeek === wk.id;
           return `
             <button
               type="button"
               data-week-filter="${wk.id}"
-              class="px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
+              class="px-2.5 py-1 rounded-full text-[11px] font-semibold transition-all ${
                 active
                   ? 'bg-editorialInk text-white shadow-sm'
                   : 'bg-white text-editorialInk border border-editorialLine hover:border-editorialInk'
@@ -1158,7 +1247,6 @@
         }).join('');
       }
 
-      // 6B. Renderowanie tabeli grafiku
       function renderTable() {
         const thead = document.getElementById('scheduleHead');
         const tbody = document.getElementById('scheduleBody');
@@ -1166,27 +1254,26 @@
 
         wrapper.classList.toggle('edit-mode-active', isEditMode);
 
-        // Jeśli wybrano konkretną osobę, pokazujemy jej kolumnę jako wyróżnioną (a na wąskich ekranach skupiamy widok)
         const visibleEmployees = activePerson === 'all'
           ? EMPLOYEES
           : EMPLOYEES.filter((e) => e.id === activePerson);
 
-        // Nagłówek tabeli
         thead.innerHTML = `
           <tr>
-            <th class="py-3.5 px-4 font-bold w-40 border-r border-editorialLine bg-[#F4F4F4] sticky left-0 z-10">
+            <th class="py-2.5 px-3.5 font-bold w-44 border-r border-editorialLine sticky-day-col">
               Dzień
             </th>
             ${visibleEmployees
               .map(
                 (emp) => `
-              <th class="py-3.5 px-3 font-bold border-r last:border-r-0 border-editorialLine min-w-[140px]">
-                <div class="flex items-center justify-between gap-2">
-                  <div class="flex items-center gap-2">
+              <th class="py-2.5 px-2.5 font-bold border-r last:border-r-0 border-editorialLine min-w-[132px] ${emp.isPrimary ? 'paulina-head' : ''}">
+                <div class="flex items-center justify-between gap-1.5">
+                  <div class="flex items-center gap-1.5 min-w-0">
                     <span class="w-2.5 h-2.5 rounded-full shrink-0" style="background-color:${emp.accent}"></span>
-                    <span class="text-editorialInk">${emp.name}</span>
+                    <span class="text-editorialInk truncate" title="${emp.name}">${emp.name}</span>
+                    ${emp.isPrimary ? '<span class="px-1 py-0.2 rounded bg-[#1E88E5] text-white font-mono text-[8px] font-bold shrink-0">#1</span>' : ''}
                   </div>
-                  <span class="text-[10px] font-medium text-editorialMuted">h</span>
+                  <span class="font-mono text-[10px] font-medium text-editorialMuted shrink-0">h</span>
                 </div>
               </th>
             `
@@ -1195,68 +1282,72 @@
           </tr>
         `;
 
-        // Filtrowanie wierszy po tygodniu i statusie
         let visibleCount = 0;
         const rowsHtml = [];
 
         scheduleData.forEach((row, dayIndex) => {
-          // Filtr tygodnia
-          if (activeWeek !== 'all' && String(row.week) !== activeWeek) {
-            return;
-          }
+          if (activeWeek !== 'all' && String(row.week) !== activeWeek) return;
 
-          // Niedziela
-          if (row.isSunday) {
-            if (activeStatus !== 'all' && activeStatus !== 'off') {
-              return;
-            }
-            visibleCount++;
+          if (row.isHolidayRow) {
+            if (activeStatus !== 'all' && activeStatus !== 'off') return;
+            visibleCount += 1;
+            const isChristmas = row.day >= 24 && row.day <= 26;
+            const rowBg = isChristmas ? 'bg-[#8B1A24]' : 'bg-[#6E1820]';
             rowsHtml.push(`
-              <tr class="bg-[#7F1D1D] text-white">
-                <td class="py-2.5 px-4 font-bold border-r border-white/15 sticky left-0 bg-[#7F1D1D] z-10">
+              <tr class="${rowBg} text-white">
+                <td class="py-2 px-3.5 font-bold border-r border-white/15 sticky-day-col ${rowBg} whitespace-nowrap text-[11px]">
                   ${row.dateLabel}
                 </td>
-                <td colspan="${visibleEmployees.length}" class="py-2.5 px-4 text-center font-display font-bold tracking-[0.2em] text-[11px] uppercase">
-                  ${row.sundayText}
+                <td colspan="${visibleEmployees.length}" class="py-2 px-3 text-center font-display font-bold tracking-[0.16em] text-[10px] uppercase">
+                  ${isChristmas ? '★ ' : ''}${row.holidayText}${isChristmas ? ' ★' : ''}
                 </td>
               </tr>
             `);
             return;
           }
 
-          // Filtr statusu: sprawdź, czy chociaż jedna widoczna osoba w danym dniu pasuje do filtra statusu
           if (activeStatus !== 'all') {
-            const anyMatch = visibleEmployees.some((emp) => {
+            const hasMatch = visibleEmployees.some((emp) => {
               const s = row.shifts[emp.id];
-              return s && matchesStatusFilter(s.type, activeStatus);
+              return s && matchesStatusFilter(s.type, emp.id, activeStatus);
             });
-            if (!anyMatch) return;
+            if (!hasMatch) return;
           }
 
-          visibleCount++;
+          visibleCount += 1;
           const isTrainingDay = row.day === 14;
-          const rowBg = isTrainingDay ? 'bg-purple-50/40' : 'hover:bg-[#FAFAFA]';
+          const isNYE = row.day === 31;
+          const rowClass = isTrainingDay
+            ? 'bg-purple-50/40'
+            : isNYE
+              ? 'bg-slate-100/70'
+              : 'hover:bg-[#FAFAFA]';
 
           const cellsHtml = visibleEmployees
             .map((emp) => {
               const s = row.shifts[emp.id];
-              if (!s) return '<td class="p-2 border-r border-editorialLine"></td>';
+              if (!s) return '<td class="p-1 border-r border-editorialLine"></td>';
 
-              const isMatch = matchesStatusFilter(s.type, activeStatus);
-              const dimClass = !isMatch ? 'opacity-25' : '';
-              const badgeStyle = getShiftBadgeStyle(s.type);
+              const isMatch = matchesStatusFilter(s.type, emp.id, activeStatus);
+              const dimClass = !isMatch ? 'opacity-20' : '';
+              const badgeStyle = getShiftBadgeStyle(s, emp.id, row.day);
               const hoursText = s.hours > 0 ? formatHours(s.hours) : '—';
+              const paulinaColBg = emp.isPrimary ? 'bg-[#F7FBFF]' : '';
+
+              const labelHtml = s.type === 'kato'
+                ? `<span class="inline-flex items-center gap-1 truncate"><span class="px-1 rounded bg-amber-500 text-white font-mono text-[8px] font-bold">KATO</span><span class="truncate">${s.label.replace(/\s*KATO/i, '')}</span></span>`
+                : `<span class="truncate">${s.label}</span>`;
 
               return `
                 <td
-                  class="shift-cell p-2 border-r last:border-r-0 border-editorialLine align-middle ${dimClass}"
+                  class="shift-cell p-1 border-r last:border-r-0 border-editorialLine align-middle ${paulinaColBg} ${dimClass}"
                   data-day-index="${dayIndex}"
                   data-emp-id="${emp.id}"
-                  title="${isEditMode ? 'Kliknij, aby edytować zmianę' : emp.name + ' — ' + row.dateLabel}"
+                  title="${isEditMode ? 'Kliknij, aby edytować: ' + emp.name + ' (' + row.dateLabel + ')' : emp.name + ' — ' + row.dateLabel}"
                 >
-                  <div class="flex items-center justify-between gap-2 px-2.5 py-1.5 rounded-md ${badgeStyle}">
-                    <span class="font-semibold text-[11px] truncate">${s.label}</span>
-                    <span class="text-[10px] font-medium opacity-85 tabular-nums shrink-0">${hoursText}</span>
+                  <div class="flex items-center justify-between gap-1 px-2 py-1 rounded ${badgeStyle}">
+                    <span class="font-semibold text-[11px] min-w-0 flex items-center">${labelHtml}</span>
+                    <span class="font-mono text-[10px] font-medium opacity-85 tabular-nums shrink-0">${hoursText}</span>
                   </div>
                 </td>
               `;
@@ -1264,11 +1355,12 @@
             .join('');
 
           rowsHtml.push(`
-            <tr class="${rowBg} transition-colors">
-              <td class="py-2.5 px-4 font-semibold text-editorialInk border-r border-editorialLine sticky left-0 bg-white z-10 whitespace-nowrap">
-                <div class="flex items-center justify-between gap-2">
+            <tr class="${rowClass} transition-colors">
+              <td class="py-1.5 px-3.5 font-semibold text-editorialInk border-r border-editorialLine sticky-day-col bg-white whitespace-nowrap text-[11px]">
+                <div class="flex items-center justify-between gap-1.5">
                   <span>${row.dateLabel}</span>
-                  ${isTrainingDay ? '<span class="w-1.5 h-1.5 rounded-full bg-purple-600" title="Dzień szkoleniowy"></span>' : ''}
+                  ${isTrainingDay ? '<span class="px-1 py-0.2 rounded bg-[#D966FF] text-white font-mono text-[8px] font-bold">SZK</span>' : ''}
+                  ${isNYE ? '<span class="px-1 py-0.2 rounded bg-editorialInk text-white font-mono text-[8px] font-bold">31.12</span>' : ''}
                 </div>
               </td>
               ${cellsHtml}
@@ -1292,140 +1384,155 @@
           `Wyświetlanie ${visibleCount} z ${scheduleData.length} dni grudnia 2026`;
       }
 
-      // 6C. Renderowanie dynamicznego indeksu w Hero + 5 kart podsumowania zespołu
-      function renderStats() {
-        const stats = computeEmployeeStats();
+      function renderHeroAndTeamStats() {
+        const stats = computeStats();
+        const { byEmp } = stats;
 
-        // 1) Dolny indeks Hero: Zespół & Godziny
-        const heroTeamList = document.getElementById('heroTeamHoursList');
-        heroTeamList.innerHTML = EMPLOYEES.map((emp) => {
-          const st = stats[emp.id];
-          const vacNote = st.vacationHours > 0 ? ` <span class="text-editorialMuted">(+urlop ${formatHoursCompact(st.vacationHours)})</span>` : '';
-          return `
-            <li class="flex items-center justify-between gap-2">
-              <span class="inline-flex items-center gap-1.5">
-                <span class="w-2 h-2 rounded-full shrink-0" style="background-color:${emp.accent}"></span>
-                <span>${emp.name}</span>
-              </span>
-              <span class="tabular-nums font-bold">${formatHoursCompact(st.workHours)}${vacNote}</span>
-            </li>
-          `;
-        }).join('');
+        // --- CIENKI PASEK KPI BEZPOŚREDNIO POD HERO ---
+        document.getElementById('kpiStrip').innerHTML = `
+          <div class="flex items-center justify-between gap-2 px-3 py-1.5 rounded-lg bg-editorialBg/70 border border-editorialLine/80">
+            <span class="font-mono text-[10px] uppercase text-editorialMuted">Praca łącznie</span>
+            <span class="font-display font-bold text-sm text-editorialInk tabular-nums">${formatHoursCompact(stats.totalTeamWorkHours)}</span>
+          </div>
+          <div class="flex items-center justify-between gap-2 px-3 py-1.5 rounded-lg bg-editorialBg/70 border border-editorialLine/80">
+            <span class="font-mono text-[10px] uppercase text-editorialMuted">Urlopy W.</span>
+            <span class="font-display font-bold text-sm text-[#1E88E5] tabular-nums">${formatHoursCompact(stats.totalTeamVacationHours)}</span>
+          </div>
+          <div class="flex items-center justify-between gap-2 px-3 py-1.5 rounded-lg bg-editorialBg/70 border border-editorialLine/80">
+            <span class="font-mono text-[10px] uppercase text-editorialMuted">Szkolenie 14.12</span>
+            <span class="font-display font-bold text-sm text-[#A020F0]">${stats.totalSzkolenieSlots} os. · WAW ${stats.totalWarszawaDays}d</span>
+          </div>
+          <div class="flex items-center justify-between gap-2 px-3 py-1.5 rounded-lg bg-[#7A1622]/10 border border-[#7A1622]/30">
+            <span class="font-mono text-[10px] uppercase text-[#7A1622] font-semibold">Święta</span>
+            <span class="font-display font-bold text-sm text-[#7A1622]">24–26.12 (+27.12)</span>
+          </div>
+        `;
 
-        // 2) Dolny indeks Hero: Urlopy Wypoczynkowe
-        const heroVacList = document.getElementById('heroVacationsList');
-        const vacEntries = EMPLOYEES.map((emp) => stats[emp.id]).filter((st) => st.vacationDays.length > 0);
-        if (vacEntries.length === 0) {
-          heroVacList.innerHTML = '<li class="text-editorialMuted">Brak zaplanowanych urlopów</li>';
-        } else {
-          heroVacList.innerHTML = vacEntries
-            .map(
-              (st) => `
-              <li>
-                <strong>${st.name}</strong> — ${st.vacationDays.join(', ')}
-                <span class="text-editorialMuted">(${formatHoursCompact(st.vacationHours)})</span>
-              </li>
-            `
-            )
-            .join('');
-        }
+        // --- 4-KOLUMNOWY INDEKS EDITORIALOWY POD TABELĄ ---
+        document.getElementById('heroIndexHours').innerHTML = `
+          <div class="font-display font-bold text-base text-editorialInk tabular-nums">${formatHoursCompact(stats.totalTeamWorkHours)}</div>
+          <div class="text-editorialMuted">Paulina: <strong class="text-editorialInk font-mono">${formatHoursCompact(byEmp.paulina.workHours)}</strong> (${byEmp.paulina.workDays} dni)</div>
+          <div class="font-mono text-[10px] text-sky-700">Urlopy W. zespołu: ${formatHoursCompact(stats.totalTeamVacationHours)}</div>
+        `;
 
-        // 3) Sekcja Zespół: 5 kart Swiss-editorial
+        document.getElementById('heroIndexEvents').innerHTML = `
+          <div><strong>14.12 Szkolenie:</strong> ${stats.totalSzkolenieSlots} os. (Paulina, Kasia, Justyna, Alina)</div>
+          <div><strong>Delegacje WARSZAWA:</strong> ${stats.totalWarszawaDays} dni (Justyna, Alicja)</div>
+          <div><strong>Dyżury Katowice (KATO):</strong> ${stats.totalKatoDays} dni (Alina)</div>
+        `;
+
+        const dorota = byEmp.dorota;
+        const hanna = byEmp.hanna;
+        document.getElementById('heroIndexTailors').innerHTML = `
+          <div class="flex justify-between gap-2">
+            <span><strong>Krawcowa Dorota</strong> (10–20)</span>
+            <span class="font-mono font-bold">${formatHoursCompact(dorota.workHours)}</span>
+          </div>
+          <div class="flex justify-between gap-2">
+            <span><strong>Krawcowa Hanna</strong> (10–18)</span>
+            <span class="font-mono font-bold">${formatHoursCompact(hanna.workHours)}</span>
+          </div>
+          <div class="text-editorialMuted">Razem pracownia: <strong class="text-editorialInk font-mono">${formatHoursCompact(dorota.workHours + hanna.workHours)}</strong></div>
+        `;
+
+        document.getElementById('heroIndexHolidays').innerHTML = `
+          <div><strong class="text-editorialRed">24–26.12:</strong> Wigilia, Boże Narodzenie I &amp; II</div>
+          <div><strong>Niedziele wolne:</strong> 6, 13, 20, 27 grudnia</div>
+          <div class="text-editorialMuted"><strong>31.12 Sylwester:</strong> otwarty do edycji</div>
+        `;
+
+        // --- SEKCJA ZESPÓŁ: 7 KART PODSUMOWANIA (PAULINA #1) ---
         const teamGrid = document.getElementById('teamSummaryGrid');
-        const targetHours = 160; // Skala odniesienia paska postępu
+        const targetNorm = 160;
 
         teamGrid.innerHTML = EMPLOYEES.map((emp) => {
-          const st = stats[emp.id];
-          const pct = Math.min(100, Math.round((st.workHours / targetHours) * 100));
+          const st = byEmp[emp.id];
+          const pct = Math.min(100, Math.round((st.workHours / targetNorm) * 100));
           const isSelected = activePerson === emp.id;
 
           return `
             <article
               data-card-person="${emp.id}"
-              class="cursor-pointer group p-5 rounded-xl bg-white border transition-all flex flex-col justify-between ${
-                isSelected ? 'border-editorialRed ring-2 ring-editorialRed/20' : 'border-editorialLine hover:border-editorialInk'
+              class="cursor-pointer group p-3.5 rounded-xl bg-white border transition-all flex flex-col justify-between ${
+                isSelected
+                  ? 'border-editorialRed ring-2 ring-editorialRed/20'
+                  : emp.isPrimary
+                    ? 'border-[#1E88E5] ring-1 ring-[#1E88E5]/20 hover:border-editorialInk'
+                    : 'border-editorialLine hover:border-editorialInk'
               }"
               title="Kliknij, aby przefiltrować grafik dla: ${emp.name}"
             >
               <div>
-                <div class="flex items-center justify-between gap-2 mb-3">
-                  <div class="flex items-center gap-2">
-                    <span class="w-3 h-3 rounded-full shrink-0" style="background-color:${emp.accent}"></span>
-                    <h3 class="font-display font-bold text-base uppercase tracking-tight text-editorialInk">${emp.name}</h3>
+                <div class="flex items-center justify-between gap-1.5 mb-1.5">
+                  <div class="flex items-center gap-1.5 min-w-0">
+                    <span class="w-2.5 h-2.5 rounded-full shrink-0" style="background-color:${emp.accent}"></span>
+                    <h3 class="font-display font-bold text-sm uppercase tracking-tight text-editorialInk truncate">${emp.shortName}</h3>
                   </div>
-                  <span class="text-[10px] font-semibold uppercase tracking-wider text-editorialMuted group-hover:text-editorialRed transition-colors">
-                    ${isSelected ? 'Wybrano' : 'Filtruj →'}
-                  </span>
+                  <span class="font-mono text-[9px] uppercase px-1.5 py-0.5 rounded ${emp.isPrimary ? 'bg-[#EBF4FD] text-[#1E88E5] font-bold' : 'bg-editorialBg text-editorialMuted'} shrink-0">${emp.role}</span>
                 </div>
 
-                <!-- Duża liczba godzin roboczych -->
-                <div class="mb-4">
-                  <div class="font-display font-bold text-3xl tracking-tight text-editorialInk tabular-nums">
+                <div class="mb-2.5">
+                  <div class="font-display font-bold text-2xl tracking-tight text-editorialInk tabular-nums">
                     ${formatHoursCompact(st.workHours)}
                   </div>
-                  <div class="text-[11px] text-editorialMuted">Godziny pracy (1–23.12)</div>
+                  <div class="font-mono text-[10px] text-editorialMuted">Praca (${st.workDays} dni) • ${pct}%</div>
                 </div>
 
-                <!-- Pasek postępu -->
-                <div class="w-full h-1.5 bg-editorialBg rounded-full overflow-hidden mb-4">
+                <div class="w-full h-1.5 bg-editorialBg rounded-full overflow-hidden mb-3">
                   <div class="h-full rounded-full transition-all duration-500" style="width:${pct}%; background-color:${emp.accent}"></div>
                 </div>
               </div>
 
-              <!-- Szczegółowe liczniki -->
-              <dl class="pt-3 border-t border-editorialLine/80 space-y-1.5 text-[11px]">
-                <div class="flex justify-between">
-                  <dt class="text-editorialMuted">Liczba zmian</dt>
-                  <dd class="font-bold text-editorialInk tabular-nums">${st.shiftCount}</dd>
-                </div>
+              <dl class="pt-2.5 border-t border-editorialLine/80 space-y-1 text-[11px]">
                 <div class="flex justify-between">
                   <dt class="text-editorialMuted">Urlop W.</dt>
-                  <dd class="font-bold ${st.vacationHours > 0 ? 'text-sky-600' : 'text-editorialMuted'} tabular-nums">${formatHoursCompact(st.vacationHours)}</dd>
+                  <dd class="font-mono font-bold ${st.vacationHours > 0 ? 'text-[#1E88E5]' : 'text-editorialMuted'}">${formatHoursCompact(st.vacationHours)}</dd>
                 </div>
                 <div class="flex justify-between">
-                  <dt class="text-editorialMuted">Szkolenia / Delegacje</dt>
-                  <dd class="font-bold ${st.eventCount > 0 ? 'text-purple-600' : 'text-editorialMuted'} tabular-nums">${st.eventCount}</dd>
+                  <dt class="text-editorialMuted">Katowice</dt>
+                  <dd class="font-mono font-bold ${st.katoDays > 0 ? 'text-amber-700' : 'text-editorialMuted'}">${st.katoDays} d</dd>
                 </div>
-                ${
-                  st.katoCount > 0
-                    ? `<div class="flex justify-between">
-                         <dt class="text-editorialMuted">Zmiany Katowice</dt>
-                         <dd class="font-bold text-amber-700 tabular-nums">${st.katoCount}</dd>
-                       </div>`
-                    : ''
-                }
+                <div class="flex justify-between">
+                  <dt class="text-editorialMuted">Warszawa</dt>
+                  <dd class="font-mono font-bold ${st.warszawaDays > 0 ? 'text-[#A020F0]' : 'text-editorialMuted'}">${st.warszawaDays} d</dd>
+                </div>
+                <div class="flex justify-between">
+                  <dt class="text-editorialMuted">Szkolenia</dt>
+                  <dd class="font-mono font-bold ${st.szkolenieDays > 0 ? 'text-[#A020F0]' : 'text-editorialMuted'}">${st.szkolenieDays} d</dd>
+                </div>
               </dl>
             </article>
           `;
         }).join('');
       }
 
-      // 6D. Aktualizacja wizualna przełączników Trybu Edycji
       function updateEditModeUI() {
         const heroState = document.getElementById('heroEditState');
         const tableLabel = document.getElementById('tableEditLabel');
         const tableDot = document.getElementById('tableEditDot');
         const tableBtn = document.getElementById('tableEditToggle');
-        const banner = document.getElementById('editModeBanner');
+        const editHint = document.getElementById('editModeHint');
         const resetBtn = document.getElementById('resetChangesBtn');
+        const savedBadge = document.getElementById('savedBadge');
 
         if (isEditMode) {
-          heroState.textContent = 'On •';
-          heroState.classList.add('text-editorialRed');
-          tableLabel.textContent = 'Tryb Edycji: ON';
+          heroState.textContent = 'ON •';
+          heroState.className = 'font-bold text-editorialRed';
+          tableLabel.textContent = 'Edycja: ON';
           tableDot.className = 'w-2 h-2 rounded-full bg-editorialRed animate-pulse';
-          tableBtn.classList.add('border-editorialRed', 'text-editorialRed');
-          banner.classList.remove('hidden');
+          tableBtn.className = 'inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-editorialRed bg-white text-editorialRed text-[11px] font-semibold uppercase tracking-wider hover:bg-editorialRed hover:text-white transition-all';
+          editHint.classList.remove('hidden');
         } else {
-          heroState.textContent = 'Off —';
-          heroState.classList.remove('text-editorialRed');
-          tableLabel.textContent = 'Tryb Edycji: OFF';
+          heroState.textContent = 'OFF —';
+          heroState.className = 'font-bold text-editorialInk';
+          tableLabel.textContent = 'Edycja: OFF';
           tableDot.className = 'w-2 h-2 rounded-full bg-editorialMuted';
-          tableBtn.classList.remove('border-editorialRed', 'text-editorialRed');
-          banner.classList.add('hidden');
+          tableBtn.className = 'inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-editorialInk/30 bg-white text-editorialInk text-[11px] font-semibold uppercase tracking-wider hover:border-editorialInk transition-all';
+          editHint.classList.add('hidden');
         }
 
-        resetBtn.classList.toggle('hidden', !hasUnsavedEdits);
+        resetBtn.classList.toggle('hidden', !hasCustomChanges);
+        savedBadge.classList.toggle('hidden', !hasCustomChanges);
       }
 
       // =================================================================
@@ -1434,7 +1541,7 @@
       function openEditModal(dayIndex, empId) {
         const row = scheduleData[dayIndex];
         const emp = EMPLOYEES.find((e) => e.id === empId);
-        const shift = row.shifts[empId];
+        const shift = row && row.shifts ? row.shifts[empId] : null;
         if (!row || !emp || !shift) return;
 
         editingTarget = { dayIndex, empId };
@@ -1455,7 +1562,7 @@
       }
 
       // =================================================================
-      // 8. EKSPORT DO CSV (UTF-8 z BOM dla Excel / Google Sheets)
+      // 8. EKSPORT CSV (UTF-8 Z BOM • PAULINA W 1. KOLUMNIE)
       // =================================================================
       function exportToCSV() {
         try {
@@ -1467,8 +1574,8 @@
           const lines = [headers.join(';')];
 
           scheduleData.forEach((row) => {
-            if (row.isSunday) {
-              const cells = [row.dateLabel, row.sundayText];
+            if (row.isHolidayRow) {
+              const cells = [row.dateLabel, row.holidayText];
               while (cells.length < headers.length) cells.push('');
               lines.push(cells.join(';'));
               return;
@@ -1476,7 +1583,7 @@
             const cells = [row.dateLabel];
             EMPLOYEES.forEach((emp) => {
               const s = row.shifts[emp.id] || { label: '', hours: 0 };
-              const hrsStr = s.hours > 0 ? Number(s.hours).toFixed(2).replace('.', ',') : '';
+              const hrsStr = s.hours > 0 ? Number(s.hours).toFixed(2).replace('.', ',') : '0,00';
               cells.push(`"${String(s.label).replace(/"/g, '""')}"`, hrsStr);
             });
             lines.push(cells.join(';'));
@@ -1487,90 +1594,79 @@
           const url = URL.createObjectURL(blob);
           const link = document.createElement('a');
           link.setAttribute('href', url);
-          link.setAttribute('download', 'grafik-grudzien-2026.csv');
+          link.setAttribute('download', 'grafik-grudzien-2026-pelny.csv');
           document.body.appendChild(link);
           link.click();
           document.body.removeChild(link);
           URL.revokeObjectURL(url);
 
-          showToast('Pobrano plik grafik-grudzien-2026.csv');
+          showToast('Pobrano grafik-grudzien-2026-pelny.csv (Paulina #1)');
         } catch (err) {
-          showToast('Nie udało się wygenerować pliku CSV.');
+          showToast('Błąd podczas generowania pliku CSV.');
         }
       }
 
       // =================================================================
-      // 9. ZEGAR NA ŻYWO (STREFA CZASOWA POLSKI)
+      // 9. ZEGAR PL NA ŻYWO
       // =================================================================
       function updateLiveClock() {
-        const clockEl = document.getElementById('liveClock');
-        if (!clockEl) return;
+        const el = document.getElementById('liveClock');
+        if (!el) return;
         try {
-          const now = new Date();
           const formatted = new Intl.DateTimeFormat('pl-PL', {
             timeZone: 'Europe/Warsaw',
             hour: '2-digit',
             minute: '2-digit',
-          }).format(now);
-          clockEl.textContent = `PL ${formatted}`;
+          }).format(new Date());
+          el.textContent = `PL ${formatted}`;
         } catch (e) {
-          const d = new Date();
-          const hh = String(d.getHours()).padStart(2, '0');
-          const mm = String(d.getMinutes()).padStart(2, '0');
-          clockEl.textContent = `PL ${hh}:${mm}`;
+          el.textContent = 'PL';
         }
       }
 
       // =================================================================
-      // 10. AKTYWNA STRZAŁKA W MENU NAWIGACYJNYM
-      // =================================================================
-      function initNavHighlight() {
-        const links = document.querySelectorAll('.nav-link');
-        links.forEach((link) => {
-          link.addEventListener('click', () => {
-            links.forEach((l) => l.querySelector('.nav-arrow').classList.add('opacity-0'));
-            link.querySelector('.nav-arrow').classList.remove('opacity-0');
-          });
-        });
-      }
-
-      // =================================================================
-      // 11. ZDARZENIA (EVENT LISTENERS)
+      // 10. ZDARZENIA (EVENT LISTENERS)
       // =================================================================
       function toggleEditMode() {
         isEditMode = !isEditMode;
         updateEditModeUI();
         renderTable();
-        showToast(isEditMode ? 'Tryb Edycji włączony — kliknij komórkę w grafiku' : 'Tryb Edycji wyłączony');
+        showToast(isEditMode ? 'Tryb Edycji włączony — kliknij dowolną komórkę' : 'Tryb podglądu (edycja wyłączona)');
       }
 
       function bindEvents() {
-        // Przełączniki trybu edycji
         document.getElementById('heroEditToggle').addEventListener('click', toggleEditMode);
         document.getElementById('tableEditToggle').addEventListener('click', toggleEditMode);
 
-        // Eksport CSV
-        document.getElementById('heroExportCsvBtn').addEventListener('click', exportToCSV);
+        document.getElementById('navExportCsvBtn').addEventListener('click', exportToCSV);
+        document.getElementById('heroExportBtn').addEventListener('click', exportToCSV);
         document.getElementById('tableExportCsvBtn').addEventListener('click', exportToCSV);
 
-        // Resetowanie zmian
         document.getElementById('resetChangesBtn').addEventListener('click', () => {
           scheduleData = deepClone(INITIAL_SCHEDULE);
-          hasUnsavedEdits = false;
+          try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+          hasCustomChanges = false;
           updateEditModeUI();
           renderTable();
-          renderStats();
-          showToast('Przywrócono oryginalny grafik z arkusza');
+          renderHeroAndTeamStats();
+          showToast('Przywrócono oryginalny grafik (1–31 grudnia 2026)');
         });
 
-        // Kliknięcia filtrów (delegacja zdarzeń)
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach((link) => {
+          link.addEventListener('click', () => {
+            navLinks.forEach((l) => l.querySelector('.nav-arrow').classList.add('opacity-0'));
+            link.querySelector('.nav-arrow').classList.remove('opacity-0');
+          });
+        });
+
         document.getElementById('personFilterGroup').addEventListener('click', (e) => {
           const btn = e.target.closest('[data-person-filter]');
           if (!btn) return;
           activePerson = btn.getAttribute('data-person-filter');
           renderFilters();
           renderTable();
-          renderStats();
+          renderHeroAndTeamStats();
         });
 
         document.getElementById('statusFilterGroup').addEventListener('click', (e) => {
@@ -1589,7 +1685,6 @@
           renderTable();
         });
 
-        // Kliknięcie karty pracownika w sekcji Zespół -> filtruje grafik dla tej osoby
         document.getElementById('teamSummaryGrid').addEventListener('click', (e) => {
           const card = e.target.closest('[data-card-person]');
           if (!card) return;
@@ -1597,11 +1692,10 @@
           activePerson = activePerson === empId ? 'all' : empId;
           renderFilters();
           renderTable();
-          renderStats();
+          renderHeroAndTeamStats();
           document.getElementById('grafik').scrollIntoView({ behavior: 'smooth' });
         });
 
-        // Kliknięcie komórki w tabeli (w trybie edycji)
         document.getElementById('scheduleBody').addEventListener('click', (e) => {
           if (!isEditMode) return;
           const cell = e.target.closest('.shift-cell');
@@ -1611,31 +1705,24 @@
           openEditModal(dayIndex, empId);
         });
 
-        // Presety w modalu edycji
         document.querySelectorAll('.preset-btn').forEach((btn) => {
           btn.addEventListener('click', () => {
-            const preset = btn.getAttribute('data-preset');
+            const p = btn.getAttribute('data-preset');
             const labelEl = document.getElementById('shiftLabelInput');
             const hoursEl = document.getElementById('shiftHoursInput');
             const typeEl = document.getElementById('shiftTypeSelect');
 
-            if (preset === 'work') {
-              labelEl.value = '11-20'; hoursEl.value = 8; typeEl.value = 'work';
-            } else if (preset === 'kato') {
-              labelEl.value = '11-19 KATO'; hoursEl.value = 8; typeEl.value = 'kato';
-            } else if (preset === 'event') {
-              labelEl.value = '11-20 Szkolenie'; hoursEl.value = 8; typeEl.value = 'event';
-            } else if (preset === 'vacation') {
-              labelEl.value = 'Urlop W.'; hoursEl.value = 8; typeEl.value = 'vacation';
-            } else if (preset === 'off-red') {
-              labelEl.value = 'Wolne'; hoursEl.value = 0; typeEl.value = 'off-red';
-            } else if (preset === 'off-navy') {
-              labelEl.value = 'Wolne'; hoursEl.value = 0; typeEl.value = 'off-navy';
-            }
+            if (p === 'work')      { labelEl.value = '11-20'; hoursEl.value = 8; typeEl.value = 'work'; }
+            if (p === 'dorota')    { labelEl.value = '10-20'; hoursEl.value = 10; typeEl.value = 'work'; }
+            if (p === 'hanna')     { labelEl.value = '10-18'; hoursEl.value = 8; typeEl.value = 'work'; }
+            if (p === 'kato')      { labelEl.value = '11-19 KATO'; hoursEl.value = 8; typeEl.value = 'kato'; }
+            if (p === 'warszawa')  { labelEl.value = 'WARSZAWA'; hoursEl.value = 8; typeEl.value = 'warszawa'; }
+            if (p === 'szkolenie') { labelEl.value = '11-20 Szkolenie'; hoursEl.value = 8; typeEl.value = 'szkolenie'; }
+            if (p === 'urlop')     { labelEl.value = 'Urlop W.'; hoursEl.value = 8; typeEl.value = 'urlop'; }
+            if (p === 'off')       { labelEl.value = 'Wolne'; hoursEl.value = 0; typeEl.value = 'off'; }
           });
         });
 
-        // Zapis formularza edycji
         document.getElementById('editShiftForm').addEventListener('submit', (e) => {
           e.preventDefault();
           if (!editingTarget) return;
@@ -1645,17 +1732,18 @@
           const hours = Math.max(0, parseFloat(document.getElementById('shiftHoursInput').value) || 0);
           const type = document.getElementById('shiftTypeSelect').value;
 
-          scheduleData[dayIndex].shifts[empId] = { label, hours, type };
-          hasUnsavedEdits = true;
+          const prevTone = scheduleData[dayIndex].shifts[empId]?.tone;
+          scheduleData[dayIndex].shifts[empId] = { label, hours, type, tone: type === 'off' ? (prevTone || 'maroon') : undefined };
+          saveToStorage();
+          hasCustomChanges = checkIfModified();
 
           closeEditModal();
           updateEditModeUI();
           renderTable();
-          renderStats();
-          showToast('Zapisano zmianę i przeliczono godziny');
+          renderHeroAndTeamStats();
+          showToast('Zapisano zmianę w grafiku (localStorage)');
         });
 
-        // Zamykanie modala
         document.getElementById('closeModalBtn').addEventListener('click', closeEditModal);
         document.getElementById('cancelModalBtn').addEventListener('click', closeEditModal);
         document.getElementById('editModalBackdrop').addEventListener('click', (e) => {
@@ -1667,17 +1755,16 @@
       }
 
       // =================================================================
-      // 12. INICJALIZACJA APLIKACJI
+      // 11. START APLIKACJI
       // =================================================================
       function init() {
         updateLiveClock();
         setInterval(updateLiveClock, 30000);
-        initNavHighlight();
         bindEvents();
         updateEditModeUI();
         renderFilters();
         renderTable();
-        renderStats();
+        renderHeroAndTeamStats();
       }
 
       document.addEventListener('DOMContentLoaded', init);
